@@ -28,26 +28,23 @@ if ($type === 'lost') {
         WHERE 1=1
     ";
 
+    $params = [];
+
     if ($status !== 'all') {
         $query .= " AND li.status = :status";
+        $params['status'] = $status;
     }
 
     if (!empty($search)) {
-        $query .= " AND (li.item_name LIKE :search OR li.description LIKE :search)";
+        $query .= " AND (li.item_name LIKE :search_name OR li.description LIKE :search_desc)";
+        $params['search_name'] = "%{$search}%";
+        $params['search_desc'] = "%{$search}%";
     }
 
     $query .= " ORDER BY li.created_at DESC";
 
     $stmt = $pdo->prepare($query);
-
-    if ($status !== 'all') {
-        $stmt->bindValue(':status', $status);
-    }
-    if (!empty($search)) {
-        $stmt->bindValue(':search', "%$search%");
-    }
-
-    $stmt->execute();
+    $stmt->execute($params);
     $items = $stmt->fetchAll();
 }
 // Build query for found items
@@ -59,28 +56,26 @@ else {
         WHERE 1=1
     ";
 
+    $params = [];
+
     if ($status !== 'all') {
         $query .= " AND fi.status = :status";
+        $params['status'] = $status;
     }
 
     if (!empty($search)) {
-        $query .= " AND (fi.item_name LIKE :search OR fi.description LIKE :search)";
+        $query .= " AND (fi.item_name LIKE :search_name OR fi.description LIKE :search_desc)";
+        $params['search_name'] = "%{$search}%";
+        $params['search_desc'] = "%{$search}%";
     }
 
     $query .= " ORDER BY fi.created_at DESC";
 
     $stmt = $pdo->prepare($query);
-
-    if ($status !== 'all') {
-        $stmt->bindValue(':status', $status);
-    }
-    if (!empty($search)) {
-        $stmt->bindValue(':search', "%$search%");
-    }
-
-    $stmt->execute();
+    $stmt->execute($params);
     $items = $stmt->fetchAll();
 }
+
 
 // Get counts for different statuses
 $counts = [];
