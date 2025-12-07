@@ -89,35 +89,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-light">
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="index.php">Lost & Found Admin</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="adminNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="pending_lost.php">Pending Lost</a></li>
-                <li class="nav-item"><a class="nav-link" href="pending_found.php">Pending Found</a></li>
-                <li class="nav-item"><a class="nav-link" href="claim_requests.php">Claim Requests</a></li>
-                <li class="nav-item"><a class="nav-link" href="all_items.php">All Items</a></li>
-                <li class="nav-item"><a class="nav-link" href="statistics.php">Statistics</a></li>
-            </ul>
-
-            <span class="text-white me-3">
-                Admin: <?= htmlspecialchars(getCurrentUserName()); ?>
-            </span>
-            <a href="../logout.php" class="btn btn-outline-light btn-sm">Logout</a>
-        </div>
-    </div>
-</nav>
+<?php include '../components/sidebar.php'; ?>
 
 <div class="container py-4">
-
-    <a href="pending_lost.php" class="btn btn-link">&larr; Back to Pending Lost Items</a>
 
     <h1 class="mb-4">Verify Lost Item</h1>
 

@@ -213,26 +213,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-    <div class="container">
-        <a class="navbar-brand" href="index.php">Admin Panel</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" href="index.php">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="pending_lost.php">Pending Lost</a></li>
-                <li class="nav-item"><a class="nav-link" href="pending_found.php">Pending Found</a></li>
-                <li class="nav-item"><a class="nav-link active" href="claim_requests.php">Claim Requests</a></li>
-                <li class="nav-item"><a class="nav-link" href="all_items.php">All Items</a></li>
-            </ul>
-            <span class="navbar-text me-3">Admin: <?= htmlspecialchars(getCurrentUserName()) ?></span>
-            <a class="btn btn-outline-light" href="../logout.php">Logout</a>
-        </div>
-    </div>
-</nav>
+>
+<?php include '../components/sidebar.php'; ?>
 
 <main class="container mb-5">
     <h1 class="mb-3">Review Claim Request</h1>
-    <a href="claim_requests.php" class="btn btn-secondary mb-3">&larr; Back to Claim Requests</a>
+   
 
     <?php if ($error): ?><div class="alert alert-danger"><?= htmlspecialchars($error) ?></div><?php endif; ?>
     <?php if ($success): ?><div class="alert alert-success"><?= htmlspecialchars($success) ?></div><?php endif; ?>
