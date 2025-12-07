@@ -1,7 +1,7 @@
 <?php
 ///**
 // * Database Configuration
-// * PDO connection setup with error handling
+// * PARA SA MYSQL PORT NA 3307 AT MAY PASSWORD
 // */
 //
 //// Correct constant names
@@ -30,7 +30,7 @@
 
 
 
-// Database credentials
+// Database credentials - PARA SA MYSQL PORT NA 3307 AT MAY PASSWORD
 //define('DB_HOST', 'localhost');
 //define('DB_PORT', '3307'); // Make sure this matches your XAMPP MySQL port
 //define('DB_USER', 'root');
@@ -53,7 +53,10 @@
 //} catch (PDOException $e) {
 //    die("Database connection failed: " . $e->getMessage());
 //}
-// Correct constant names
+
+
+
+// PARA SA NORMAL NA MYSQL 3306 PORT AND NO PASSOWRD, IF MAY PASSWORD EH LAGYAN MO
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
