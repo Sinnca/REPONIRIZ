@@ -11,15 +11,15 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     body {
         background: linear-gradient(145deg, #e5e8ec, #fafbfc);
         font-family: "Inter", sans-serif;
+        margin-left: 250px !important;
     }
 
-    /* Sidebar container */
+    /* Sidebar container - Fixed expanded */
     #sidebar {
         height: 100vh;
-        width: 75px;
+        width: 250px;
         background: rgba(31, 41, 55, 0.85);
         backdrop-filter: blur(12px);
-        transition: all 0.35s ease;
         overflow-x: hidden;
         overflow-y: auto;
         position: fixed;
@@ -29,36 +29,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         left: 0;
     }
 
-    #sidebar.expanded {
-        width: 250px;
-    }
-
     /* Sidebar header */
     #sidebar .brand-text {
         font-size: 1.25rem;
         font-weight: 600;
-        opacity: 0;
-        transition: opacity .3s ease;
         letter-spacing: 0.5px;
         white-space: nowrap;
-    }
-
-    #sidebar.expanded .brand-text {
-        opacity: 1;
-    }
-
-    #toggleBtn {
-        border: none;
-        background: rgba(255, 255, 255, 0.15);
-        color: white;
-        padding: 6px 10px;
-        border-radius: 8px;
-        transition: background .2s ease;
-        cursor: pointer;
-    }
-
-    #toggleBtn:hover {
-        background: rgba(255, 255, 255, 0.3);
     }
 
     /* Nav Links */
@@ -93,15 +69,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         min-width: 30px;
     }
 
-    /* Text hidden when collapsed */
-    #sidebar:not(.expanded) .menu-text {
-        display: none;
-    }
-
-    #sidebar:not(.expanded) .dropdown-toggle::after {
-        display: none;
-    }
-
     /* Dropdown links */
     .collapse .sidebar-nav-link {
         padding-left: 45px;
@@ -111,16 +78,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
     .collapse .sidebar-nav-link:hover {
         opacity: 1;
-    }
-
-    /* Content area adjustment */
-    body {
-        margin-left: 75px;
-        transition: margin-left 0.35s ease;
-    }
-
-    body.sidebar-expanded {
-        margin-left: 250px;
     }
 
     /* User section */
@@ -141,10 +98,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         overflow: hidden;
     }
 
-    #sidebar:not(.expanded) .user-info {
-        display: none;
-    }
-
     .logout-btn {
         color: #dbe3ec !important;
         font-size: 14px;
@@ -160,11 +113,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     .logout-btn:hover {
         background: rgba(239, 68, 68, 0.2);
         color: #ffffff !important;
-    }
-
-    /* Smooth collapse animations */
-    .collapse {
-        transition: height 0.25s ease;
     }
 
     /* Scrollbar styling */
@@ -184,15 +132,18 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     #sidebar::-webkit-scrollbar-thumb:hover {
         background: rgba(255, 255, 255, 0.3);
     }
+
+    /* Keep dropdowns always visible */
+    .collapse {
+        display: block !important;
+        height: auto !important;
+    }
 </style>
 
 <!-- Sidebar -->
 <div id="sidebar">
     <div class="d-flex align-items-center p-3 border-bottom border-secondary" style="position: sticky; top: 0; background: rgba(31, 41, 55, 0.95); z-index: 10;">
-        <button id="toggleBtn">
-            <i class="bi bi-list fs-5"></i>
-        </button>
-        <span class="brand-text ms-3 text-white">Admin Panel</span>
+        <span class="brand-text text-white">Admin Panel</span>
     </div>
 
     <div style="display: flex; flex-direction: column; min-height: calc(100vh - 60px);">
@@ -202,18 +153,18 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <li class="nav-item">
                 <a class="sidebar-nav-link <?php echo $currentPage == 'index.php' ? 'active' : ''; ?>" href="index.php">
                     <i class="bi bi-speedometer2"></i>
-                    <span class="menu-text ms-2">Dashboard</span>
+                    <span class="ms-2">Dashboard</span>
                 </a>
             </li>
 
             <!-- ITEMS -->
             <li class="nav-item mt-2">
-                <a class="sidebar-nav-link dropdown-toggle" data-bs-toggle="collapse" href="#itemsMenu" role="button">
+                <a class="sidebar-nav-link" href="#" style="pointer-events: none; opacity: 0.9;">
                     <i class="bi bi-box-seam"></i>
-                    <span class="menu-text ms-2">Items</span>
+                    <span class="ms-2">Items</span>
                 </a>
 
-                <div class="collapse" id="itemsMenu">
+                <div class="collapse show" id="itemsMenu">
                     <a class="sidebar-nav-link <?php echo $currentPage == 'pending_lost.php' ? 'active' : ''; ?>" href="pending_lost.php">
                         <i class="bi bi-search"></i>
                         <span class="ms-2">Pending Lost Items</span>
@@ -238,12 +189,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
             <!-- REPORTS -->
             <li class="nav-item mt-2">
-                <a class="sidebar-nav-link dropdown-toggle" data-bs-toggle="collapse" href="#reportsMenu" role="button">
+                <a class="sidebar-nav-link" href="#" style="pointer-events: none; opacity: 0.9;">
                     <i class="bi bi-graph-up"></i>
-                    <span class="menu-text ms-2">Reports</span>
+                    <span class="ms-2">Reports</span>
                 </a>
 
-                <div class="collapse" id="reportsMenu">
+                <div class="collapse show" id="reportsMenu">
                     <a class="sidebar-nav-link <?php echo $currentPage == 'statistics.php' ? 'active' : ''; ?>" href="statistics.php">
                         <i class="bi bi-bar-chart-line"></i>
                         <span class="ms-2">Statistics</span>
@@ -261,41 +212,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </div>
             <a class="logout-btn" href="../logout.php">
                 <i class="bi bi-box-arrow-right"></i>
-                <span class="menu-text ms-2">Logout</span>
+                <span class="ms-2">Logout</span>
             </a>
         </div>
     </div>
 </div>
-
-<!-- Sidebar Toggle Script -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const sidebar = document.getElementById("sidebar");
-        const toggleBtn = document.getElementById("toggleBtn");
-
-        // Load saved state
-        const savedState = localStorage.getItem('sidebarExpanded');
-        if (savedState === 'true') {
-            sidebar.classList.add('expanded');
-            document.body.classList.add('sidebar-expanded');
-        }
-
-        toggleBtn.addEventListener("click", () => {
-            sidebar.classList.toggle("expanded");
-            document.body.classList.toggle("sidebar-expanded");
-            
-            // Save state
-            localStorage.setItem('sidebarExpanded', sidebar.classList.contains('expanded'));
-
-            // Close dropdowns when collapsed
-            if (!sidebar.classList.contains("expanded")) {
-                document.querySelectorAll('.collapse.show').forEach(c => {
-                    const bsCollapse = bootstrap.Collapse.getInstance(c);
-                    if (bsCollapse) {
-                        bsCollapse.hide();
-                    }
-                });
-            }
-        });
-    });
-</script>
