@@ -124,7 +124,6 @@ $topUsers = $stmtTopUsers->fetchAll();
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>System Statistics & Analytics</h2>
-        <a href="index.php" class="btn btn-outline-secondary">&larr; Back to Dashboard</a>
     </div>
 
     <!-- Overall Statistics -->
