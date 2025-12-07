@@ -206,10 +206,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
         <!-- User Section -->
         <div class="user-section">
-            <div class="user-info mb-2">
-                <i class="bi bi-person-circle"></i>
-                <span class="ms-2"><?php echo htmlspecialchars($userName); ?></span>
-            </div>
             <a class="logout-btn" href="../logout.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span class="ms-2">Logout</span>

@@ -35,19 +35,12 @@ $pendingItems = $stmt->fetchAll();
 <body class="bg-light">
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-    <div class="container">
-        <a class="navbar-brand" href="index.php">Admin Dashboard</a>
-        <span class="navbar-text ms-auto">Admin: <?php echo htmlspecialchars(getCurrentUserName()); ?></span>
-        <a class="btn btn-outline-light ms-3" href="../logout.php">Logout</a>
-    </div>
-</nav>
+<?php include '../components/sidebar.php'; ?>
 
 <main class="container mb-5">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Pending Found Items (<?php echo count($pendingItems); ?>)</h2>
-        <a href="index.php" class="btn btn-secondary">&larr; Back to Dashboard</a>
     </div>
 
     <?php if (count($pendingItems) > 0): ?>

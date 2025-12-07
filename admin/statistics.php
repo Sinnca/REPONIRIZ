@@ -12,6 +12,8 @@ require_once '../includes/auth.php';
 
 requireAdmin();
 
+$userName = getCurrentUserName();
+
 // Overall Statistics
 $stats = [
     'total_users' => $pdo->query("SELECT COUNT(*) as count FROM users WHERE role = 'student'")->fetch()['count'],
@@ -83,213 +85,304 @@ $topUsers = $stmtTopUsers->fetchAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statistics - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .content-wrapper {
+            padding: 30px;
+        }
+        .stats-card { 
+            text-align: center; 
+            padding: 20px; 
+            border-radius: 12px; 
+            background: white;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .stats-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+        .stats-card h3 {
+            color: #1f2937;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 2rem;
+        }
+        .stats-card p {
+            color: #6b7280;
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-light">
 
-<header>
-    <nav>
-        <h1>Lost & Found System - Admin</h1>
-        <ul>
-            <li><a href="index.php">Dashboard</a></li>
-            <li><a href="pending_lost.php">Pending Lost Items</a></li>
-            <li><a href="pending_found.php">Pending Found Items</a></li>
-            <li><a href="claim_requests.php">Claim Requests</a></li>
-            <li><a href="all_items.php">All Items</a></li>
-            <li><a href="statistics.php">Statistics</a></li>
-        </ul>
-        <div>
-            <span>Admin: <?php echo htmlspecialchars(getCurrentUserName()); ?></span>
-            <a href="../logout.php">Logout</a>
-        </div>
-    </nav>
-</header>
+<?php include '../components/sidebar.php'; ?>
 
-<main>
+<main class="content-wrapper">
 
-    <h1>System Statistics</h1>
-
-    <a href="index.php">&larr; Back to Dashboard</a>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>System Statistics & Analytics</h2>
+        <a href="index.php" class="btn btn-outline-secondary">&larr; Back to Dashboard</a>
+    </div>
 
     <!-- Overall Statistics -->
-    <section>
-        <h2>Overall Statistics</h2>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3><?php echo $stats['total_users']; ?></h3>
-                <p>Total Students</p>
+    <section class="mb-5">
+        <h4 class="mb-3">Overall Statistics</h4>
+        <div class="row">
+            <div class="col-md-2 col-sm-6">
+                <div class="stats-card">
+                    <h3><?php echo $stats['total_users']; ?></h3>
+                    <p>Total Students</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3><?php echo $stats['total_lost']; ?></h3>
-                <p>Total Lost Items</p>
+            <div class="col-md-2 col-sm-6">
+                <div class="stats-card">
+                    <h3><?php echo $stats['total_lost']; ?></h3>
+                    <p>Total Lost Items</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3><?php echo $stats['total_found']; ?></h3>
-                <p>Total Found Items</p>
+            <div class="col-md-2 col-sm-6">
+                <div class="stats-card">
+                    <h3><?php echo $stats['total_found']; ?></h3>
+                    <p>Total Found Items</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3><?php echo $stats['total_claims']; ?></h3>
-                <p>Total Claims</p>
+            <div class="col-md-2 col-sm-6">
+                <div class="stats-card">
+                    <h3><?php echo $stats['total_claims']; ?></h3>
+                    <p>Total Claims</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3><?php echo $stats['items_returned']; ?></h3>
-                <p>Items Returned</p>
+            <div class="col-md-2 col-sm-6">
+                <div class="stats-card">
+                    <h3><?php echo $stats['items_returned']; ?></h3>
+                    <p>Items Returned</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3><?php echo $successRate; ?>%</h3>
-                <p>Success Rate</p>
+            <div class="col-md-2 col-sm-6">
+                <div class="stats-card">
+                    <h3><?php echo $successRate; ?>%</h3>
+                    <p>Success Rate</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Recent Activity (Last 30 Days) -->
-    <section>
-        <h2>Last 30 Days Activity</h2>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3><?php echo $recentStats['lost_items_30d']; ?></h3>
-                <p>Lost Items Reported</p>
+    <section class="mb-5">
+        <h4 class="mb-3">Last 30 Days Activity</h4>
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="stats-card">
+                    <h3><?php echo $recentStats['lost_items_30d']; ?></h3>
+                    <p>Lost Items Reported</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3><?php echo $recentStats['found_items_30d']; ?></h3>
-                <p>Found Items Reported</p>
+            <div class="col-md-3 col-sm-6">
+                <div class="stats-card">
+                    <h3><?php echo $recentStats['found_items_30d']; ?></h3>
+                    <p>Found Items Reported</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3><?php echo $recentStats['claims_30d']; ?></h3>
-                <p>Claims Submitted</p>
+            <div class="col-md-3 col-sm-6">
+                <div class="stats-card">
+                    <h3><?php echo $recentStats['claims_30d']; ?></h3>
+                    <p>Claims Submitted</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3><?php echo $recentStats['returned_30d']; ?></h3>
-                <p>Items Returned</p>
+            <div class="col-md-3 col-sm-6">
+                <div class="stats-card">
+                    <h3><?php echo $recentStats['returned_30d']; ?></h3>
+                    <p>Items Returned</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Lost Items by Status -->
-    <section>
-        <h2>Lost Items by Status</h2>
+    <!-- Status Breakdown Tables -->
+    <div class="row mb-5">
+        <!-- Lost Items by Status -->
+        <div class="col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Lost Items by Status</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Status</th>
+                                <th class="text-center">Count</th>
+                                <th class="text-center">Percentage</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($lostByStatus as $status => $count): ?>
+                                <tr>
+                                    <td><?php echo ucfirst(str_replace('_', ' ', $status)); ?></td>
+                                    <td class="text-center"><strong><?php echo $count; ?></strong></td>
+                                    <td class="text-center">
+                                        <?php
+                                        $percentage = $stats['total_lost'] > 0 ? round(($count / $stats['total_lost']) * 100, 1) : 0;
+                                        ?>
+                                        <span class="badge bg-primary"><?php echo $percentage; ?>%</span>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <table>
-            <thead>
-            <tr>
-                <th>Status</th>
-                <th>Count</th>
-                <th>Percentage</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($lostByStatus as $status => $count): ?>
-                <tr>
-                    <td><?php echo ucfirst(str_replace('_', ' ', $status)); ?></td>
-                    <td><?php echo $count; ?></td>
-                    <td>
-                        <?php
-                        $percentage = $stats['total_lost'] > 0 ? round(($count / $stats['total_lost']) * 100, 1) : 0;
-                        echo $percentage . '%';
-                        ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
-    </section>
+        <!-- Found Items by Status -->
+        <div class="col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Found Items by Status</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Status</th>
+                                <th class="text-center">Count</th>
+                                <th class="text-center">Percentage</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($foundByStatus as $status => $count): ?>
+                                <tr>
+                                    <td><?php echo ucfirst(str_replace('_', ' ', $status)); ?></td>
+                                    <td class="text-center"><strong><?php echo $count; ?></strong></td>
+                                    <td class="text-center">
+                                        <?php
+                                        $percentage = $stats['total_found'] > 0 ? round(($count / $stats['total_found']) * 100, 1) : 0;
+                                        ?>
+                                        <span class="badge bg-success"><?php echo $percentage; ?>%</span>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Found Items by Status -->
-    <section>
-        <h2>Found Items by Status</h2>
-
-        <table>
-            <thead>
-            <tr>
-                <th>Status</th>
-                <th>Count</th>
-                <th>Percentage</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($foundByStatus as $status => $count): ?>
-                <tr>
-                    <td><?php echo ucfirst(str_replace('_', ' ', $status)); ?></td>
-                    <td><?php echo $count; ?></td>
-                    <td>
-                        <?php
-                        $percentage = $stats['total_found'] > 0 ? round(($count / $stats['total_found']) * 100, 1) : 0;
-                        echo $percentage . '%';
-                        ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
-    </section>
-
-    <!-- Claims by Status -->
-    <section>
-        <h2>Claims by Status</h2>
-
-        <table>
-            <thead>
-            <tr>
-                <th>Status</th>
-                <th>Count</th>
-                <th>Percentage</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($claimsByStatus as $status => $count): ?>
-                <tr>
-                    <td><?php echo ucfirst($status); ?></td>
-                    <td><?php echo $count; ?></td>
-                    <td>
-                        <?php
-                        $percentage = $stats['total_claims'] > 0 ? round(($count / $stats['total_claims']) * 100, 1) : 0;
-                        echo $percentage . '%';
-                        ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
-    </section>
+        <!-- Claims by Status -->
+        <div class="col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">Claims by Status</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Status</th>
+                                <th class="text-center">Count</th>
+                                <th class="text-center">Percentage</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($claimsByStatus as $status => $count): ?>
+                                <tr>
+                                    <td><?php echo ucfirst($status); ?></td>
+                                    <td class="text-center"><strong><?php echo $count; ?></strong></td>
+                                    <td class="text-center">
+                                        <?php
+                                        $percentage = $stats['total_claims'] > 0 ? round(($count / $stats['total_claims']) * 100, 1) : 0;
+                                        ?>
+                                        <span class="badge bg-warning text-dark"><?php echo $percentage; ?>%</span>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Top Active Users -->
     <section>
-        <h2>Most Active Users (Top 5)</h2>
-
-        <?php if (count($topUsers) > 0): ?>
-            <table>
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Lost Items Reported</th>
-                    <th>Found Items Reported</th>
-                    <th>Total</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($topUsers as $user): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($user['name']); ?></td>
-                        <td><?php echo htmlspecialchars($user['email']); ?></td>
-                        <td><?php echo $user['lost_items']; ?></td>
-                        <td><?php echo $user['found_items']; ?></td>
-                        <td><strong><?php echo $user['total_items']; ?></strong></td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php else: ?>
-            <p>No activity data available yet.</p>
-        <?php endif; ?>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Most Active Users (Top 5)</h5>
+            </div>
+            <div class="card-body p-0">
+                <?php if (count($topUsers) > 0): ?>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th class="text-center">Lost Items</th>
+                                <th class="text-center">Found Items</th>
+                                <th class="text-center">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php 
+                            $rank = 1;
+                            foreach ($topUsers as $user): 
+                            ?>
+                                <tr>
+                                    <td>
+                                        <?php if ($rank == 1): ?>
+                                            <span class="badge bg-warning text-dark fs-6">🥇 <?php echo $rank; ?></span>
+                                        <?php elseif ($rank == 2): ?>
+                                            <span class="badge bg-secondary fs-6">🥈 <?php echo $rank; ?></span>
+                                        <?php elseif ($rank == 3): ?>
+                                            <span class="badge text-white fs-6" style="background: #cd7f32;">🥉 <?php echo $rank; ?></span>
+                                        <?php else: ?>
+                                            <span class="badge bg-light text-dark"><?php echo $rank; ?></span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo htmlspecialchars($user['name']); ?></td>
+                                    <td><small class="text-muted"><?php echo htmlspecialchars($user['email']); ?></small></td>
+                                    <td class="text-center">
+                                        <span class="badge bg-danger"><?php echo $user['lost_items']; ?></span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-success"><?php echo $user['found_items']; ?></span>
+                                    </td>
+                                    <td class="text-center">
+                                        <strong class="text-primary fs-5"><?php echo $user['total_items']; ?></strong>
+                                    </td>
+                                </tr>
+                            <?php 
+                            $rank++;
+                            endforeach; 
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php else: ?>
+                    <div class="alert alert-info m-3">
+                        <i class="bi bi-info-circle"></i> No activity data available yet.
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
     </section>
 
 </main>
 
-<footer>
-    <p>&copy; 2024 Campus Lost & Found System - Admin Panel</p>
+<footer class="bg-dark text-white text-center py-3">
+    &copy; 2024 Campus Lost & Found System - Admin Panel
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
