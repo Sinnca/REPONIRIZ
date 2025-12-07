@@ -58,7 +58,6 @@ $counts = [
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Claim Requests</h2>
-        
     </div>
 
     <!-- Filter Tabs -->
