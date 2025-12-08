@@ -106,64 +106,349 @@ if ($type === 'lost') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Items - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        .content-wrapper {
-            padding: 30px;
+        :root {
+            --primary-yellow: #F7C506;
+            --primary-blue: #003DA5;
+            --primary-red: #C8102E;
+            --bg-primary: #f8f9fa;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
         }
+        
+        body {
+            background: var(--bg-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+        }
+        
+        .content-wrapper {
+            padding: 40px 50px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 0;
+        }
+        
+        .page-header {
+            margin-bottom: 24px;
+        }
+        
         img.thumb { 
             width: 60px; 
             height: 60px; 
             object-fit: cover; 
-            border-radius: 4px; 
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease;
         }
+        
+        img.thumb:hover {
+            transform: scale(1.5);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        
         .filter-card {
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .filter-card h5 {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 1.125rem;
             margin-bottom: 20px;
         }
-        .filter-tabs {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-        .filter-tabs a { 
-            text-decoration: none; 
-            padding: 8px 16px; 
-            border-radius: 6px;
-            background: #f8f9fa;
-            color: #495057;
-            transition: all 0.2s;
-        }
-        .filter-tabs a:hover {
-            background: #e9ecef;
-        }
-        .filter-tabs a.active { 
-            background-color: #0d6efd; 
-            color: #fff; 
-        }
+        
         .type-tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
         }
+        
         .type-tabs a {
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            background: #f8f9fa;
-            color: #495057;
-            font-weight: 500;
-            transition: all 0.2s;
+            padding: 12px 28px;
+            border-radius: 8px;
+            background: white;
+            color: var(--text-primary);
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 2px solid var(--border-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
         }
+        
         .type-tabs a:hover {
-            background: #e9ecef;
+            background: #f9fafb;
+            border-color: var(--primary-blue);
+            transform: translateY(-1px);
         }
+        
         .type-tabs a.active {
-            background: #198754;
+            background: linear-gradient(135deg, var(--primary-blue), #0052d4);
             color: white;
+            border-color: var(--primary-blue);
+            box-shadow: 0 2px 8px rgba(0, 61, 165, 0.25);
+        }
+        
+        .card {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            background: white;
+            transition: all 0.2s ease;
+            margin-bottom: 24px;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-blue), #0052d4);
+            border-bottom: none;
+            color: white;
+            padding: 18px 24px;
+            font-size: 1rem;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .card-header h5 {
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 0;
+        }
+        
+        .card-body.p-3 {
+            padding: 24px !important;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 0.9375rem;
+        }
+        
+        .form-control, .form-select {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 61, 165, 0.1);
+        }
+        
+        .table {
+            margin-bottom: 0;
+        }
+        
+        .table thead th {
+            border-bottom: 2px solid var(--border-color);
+            border-top: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            padding: 14px 12px;
+            background: #f9fafb;
+        }
+        
+        .table tbody tr {
+            transition: background 0.15s ease;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .table tbody tr:hover {
+            background: #f9fafb;
+        }
+        
+        .table tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        .table tbody td {
+            padding: 16px 12px;
+            vertical-align: middle;
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+        }
+        
+        .table-responsive {
+            border-radius: 8px;
+        }
+        
+        .btn {
+            border-radius: 6px;
+            font-weight: 500;
+            padding: 10px 20px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            font-size: 0.9375rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        
+        .btn-primary:hover {
+            background: #003494;
+            border-color: #003494;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 61, 165, 0.25);
+        }
+        
+        .btn-success {
+            background: var(--primary-yellow);
+            color: #1f2937;
+            border-color: var(--primary-yellow);
+        }
+        
+        .btn-success:hover {
+            background: #e6b505;
+            border-color: #e6b505;
+            color: #1f2937;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(247, 197, 6, 0.25);
+        }
+        
+        .btn-outline-secondary {
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        
+        .btn-outline-secondary:hover {
+            background: #f9fafb;
+            border-color: var(--text-secondary);
+            color: var(--text-secondary);
+        }
+        
+        .alert {
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            background: white;
+            margin: 24px;
+        }
+        
+        .alert-info {
+            border-left: 4px solid var(--primary-blue);
+            background: #f0f7ff;
+            color: var(--text-primary);
+        }
+        
+        .text-muted {
+            color: var(--text-secondary) !important;
+            font-size: 0.875rem;
+        }
+        
+        footer {
+            background: var(--primary-blue);
+            color: white;
+            text-align: center;
+            padding: 24px;
+            margin-top: 48px;
+            font-size: 0.9375rem;
+        }
+        
+        .no-image-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+        
+        .guidelines-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--primary-blue);
+        }
+        
+        .guidelines-card h5 {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .guidelines-card ul {
+            margin-bottom: 0;
+            padding-left: 24px;
+        }
+        
+        .guidelines-card li {
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .guidelines-card li::marker {
+            color: var(--primary-blue);
+        }
+        
+        .guidelines-card strong {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 24px 20px;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .type-tabs a {
+                padding: 10px 18px;
+                font-size: 0.9375rem;
+            }
+            
+            .filter-card {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -173,7 +458,7 @@ if ($type === 'lost') {
 
 <main class="content-wrapper">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="page-header">
         <h2>All Items Management</h2>
     </div>
 
@@ -181,17 +466,19 @@ if ($type === 'lost') {
     <div class="type-tabs">
         <a href="?type=lost&status=<?= $status; ?>&search=<?= urlencode($search); ?>" 
            class="<?= $type === 'lost' ? 'active' : ''; ?>">
+            <i class="bi bi-search"></i>
             Lost Items
         </a>
         <a href="?type=found&status=<?= $status; ?>&search=<?= urlencode($search); ?>" 
            class="<?= $type === 'found' ? 'active' : ''; ?>">
+            <i class="bi bi-bag-check"></i>
             Found Items
         </a>
     </div>
 
     <!-- Filters Card -->
     <div class="filter-card">
-        <h5 class="mb-3">Filter Items</h5>
+        <h5><i class="bi bi-funnel me-2"></i>Filter Items</h5>
         
         <form method="GET" action="" class="row g-3">
             <input type="hidden" name="type" value="<?= $type; ?>">
@@ -230,27 +517,31 @@ if ($type === 'lost') {
             </div>
 
             <div class="col-md-2 d-flex align-items-end">
-                <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-search me-1"></i>Apply
+                </button>
             </div>
         </form>
 
         <?php if (!empty($search) || $status !== 'all'): ?>
             <div class="mt-3">
-                <a href="all_items.php?type=<?= $type; ?>" class="btn btn-sm btn-outline-secondary">Clear Filters</a>
+                <a href="all_items.php?type=<?= $type; ?>" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-x-circle me-1"></i>Clear Filters
+                </a>
             </div>
         <?php endif; ?>
     </div>
 
     <!-- Items List -->
     <div class="card">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0"><?= ucfirst($type); ?> Items (<?= count($items); ?>)</h5>
+        <div class="card-header">
+            <h5><i class="bi bi-collection me-2"></i><?= ucfirst($type); ?> Items (<?= count($items); ?>)</h5>
         </div>
-        <div class="card-body p-0">
+        <div class="card-body">
             <?php if (count($items) > 0): ?>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover align-middle mb-0">
-                        <thead class="table-light">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
                         <tr>
                             <th>ID</th>
                             <th>Photo</th>
@@ -266,7 +557,7 @@ if ($type === 'lost') {
                         <tbody>
                         <?php foreach ($items as $item): ?>
                             <tr>
-                                <td><?= $item['id']; ?></td>
+                                <td><strong>#<?= $item['id']; ?></strong></td>
                                 <td>
                                     <?php if ($item['photo']): ?>
                                         <img
@@ -275,10 +566,12 @@ if ($type === 'lost') {
                                             class="thumb"
                                         >
                                     <?php else: ?>
-                                        <span class="text-muted">No Image</span>
+                                        <div class="no-image-placeholder">
+                                            <i class="bi bi-image"></i>
+                                        </div>
                                     <?php endif; ?>
                                 </td>
-                                <td><?= htmlspecialchars($item['item_name']); ?></td>
+                                <td><strong><?= htmlspecialchars($item['item_name']); ?></strong></td>
                                 <td><?= htmlspecialchars(substr($item['description'], 0, 60)) . '...'; ?></td>
                                 <td>
                                     <?php
@@ -294,9 +587,13 @@ if ($type === 'lost') {
                                 <td><?= formatDate($item['created_at']); ?></td>
                                 <td>
                                     <?php if ($type === 'lost'): ?>
-                                        <a href="verify_lost.php?id=<?= $item['id']; ?>" class="btn btn-sm btn-success">View</a>
+                                        <a href="verify_lost.php?id=<?= $item['id']; ?>" class="btn btn-sm btn-success">
+                                            <i class="bi bi-eye me-1"></i>View
+                                        </a>
                                     <?php else: ?>
-                                        <a href="verify_found.php?id=<?= $item['id']; ?>" class="btn btn-sm btn-success">View</a>
+                                        <a href="verify_found.php?id=<?= $item['id']; ?>" class="btn btn-sm btn-success">
+                                            <i class="bi bi-eye me-1"></i>View
+                                        </a>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -305,8 +602,8 @@ if ($type === 'lost') {
                     </table>
                 </div>
             <?php else: ?>
-                <div class="alert alert-info m-3">
-                    <i class="bi bi-info-circle"></i> No items found matching your filters.
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>No items found matching your filters.
                 </div>
             <?php endif; ?>
         </div>
@@ -314,28 +611,29 @@ if ($type === 'lost') {
 
     <!-- Guidelines -->
     <section class="mt-4">
-        <div class="card">
-            <div class="card-body">
-                <h5>Item Management Guidelines</h5>
-                <ul class="mb-0">
-                    <li><strong>Pending:</strong> Items awaiting admin verification</li>
-                    <li><strong>Listed:</strong> Verified items visible to students</li>
-                    <?php if ($type === 'lost'): ?>
-                        <li><strong>Ready for Claim:</strong> Lost items with approved claim requests</li>
-                        <li><strong>Returned:</strong> Items successfully claimed and returned to owner</li>
-                    <?php else: ?>
-                        <li><strong>Verified:</strong> Found items verified by admin</li>
-                        <li><strong>Claimed:</strong> Found items claimed by owner</li>
-                    <?php endif; ?>
-                    <li><strong>Rejected:</strong> Items that don't meet criteria</li>
-                </ul>
-            </div>
+        <div class="guidelines-card">
+            <h5>
+                <i class="bi bi-clipboard-check"></i>
+                Item Management Guidelines
+            </h5>
+            <ul>
+                <li><strong>Pending:</strong> Items awaiting admin verification</li>
+                <li><strong>Listed:</strong> Verified items visible to students</li>
+                <?php if ($type === 'lost'): ?>
+                    <li><strong>Ready for Claim:</strong> Lost items with approved claim requests</li>
+                    <li><strong>Returned:</strong> Items successfully claimed and returned to owner</li>
+                <?php else: ?>
+                    <li><strong>Verified:</strong> Found items verified by admin</li>
+                    <li><strong>Claimed:</strong> Found items claimed by owner</li>
+                <?php endif; ?>
+                <li><strong>Rejected:</strong> Items that don't meet criteria</li>
+            </ul>
         </div>
     </section>
 
 </main>
 
-<footer class="bg-dark text-white text-center py-3">
+<footer>
     &copy; 2024 Campus Lost & Found System - Admin Panel
 </footer>
 
