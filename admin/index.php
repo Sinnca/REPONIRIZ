@@ -76,6 +76,22 @@ $stmtRecentActivities = $pdo->prepare("
 ");
 $stmtRecentActivities->execute();
 $recentActivities = $stmtRecentActivities->fetchAll();
+
+// Custom function for colored status badges
+function getColoredStatusBadge($status) {
+    $statusConfig = [
+        'pending' => ['class' => 'badge bg-warning text-dark', 'text' => 'Pending'],
+        'verified' => ['class' => 'badge bg-primary', 'text' => 'Verified'],
+        'ready_for_claim' => ['class' => 'badge bg-info text-dark', 'text' => 'Ready for Claim'],
+        'claimed' => ['class' => 'badge bg-success', 'text' => 'Claimed'],
+        'returned' => ['class' => 'badge bg-success', 'text' => 'Returned'],
+        'rejected' => ['class' => 'badge bg-danger', 'text' => 'Rejected'],
+        'archived' => ['class' => 'badge bg-secondary', 'text' => 'Archived'],
+    ];
+    
+    $config = $statusConfig[$status] ?? ['class' => 'badge bg-secondary', 'text' => ucwords(str_replace('_', ' ', $status))];
+    return '<span class="' . $config['class'] . '">' . $config['text'] . '</span>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -340,11 +356,42 @@ $recentActivities = $stmtRecentActivities->fetchAll();
             margin-bottom: 3rem !important;
         }
         
-        /* Professional touches */
+        /* Enhanced Status Badge Styles */
         .badge {
             padding: 6px 12px;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.8125rem;
+            border-radius: 6px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        
+        .bg-warning {
+            background-color: #fbbf24 !important;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary-blue) !important;
+            color: white !important;
+        }
+        
+        .bg-info {
+            background-color: #0ea5e9 !important;
+        }
+        
+        .bg-success {
+            background-color: #10b981 !important;
+            color: white !important;
+        }
+        
+        .bg-danger {
+            background-color: var(--primary-red) !important;
+            color: white !important;
+        }
+        
+        .bg-secondary {
+            background-color: #6b7280 !important;
+            color: white !important;
         }
         
         /* Responsive adjustments */
@@ -549,7 +596,7 @@ $recentActivities = $stmtRecentActivities->fetchAll();
                                 <tr>
                                     <td><?php echo strtoupper($activity['type']); ?></td>
                                     <td><?php echo htmlspecialchars($activity['name']); ?></td>
-                                    <td><?php echo getStatusBadge($activity['status']); ?></td>
+                                    <td><?php echo getColoredStatusBadge($activity['status']); ?></td>
                                     <td><?php echo formatDateTime($activity['created_at']); ?></td>
                                 </tr>
                             <?php endforeach; ?>

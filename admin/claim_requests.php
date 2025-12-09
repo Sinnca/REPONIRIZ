@@ -36,6 +36,20 @@ $counts = [
         'completed' => $pdo->query("SELECT COUNT(*) FROM claim_requests WHERE status = 'completed'")->fetchColumn(),
         'all' => $pdo->query("SELECT COUNT(*) FROM claim_requests")->fetchColumn()
 ];
+
+// Custom function for colored status badges
+function getColoredStatusBadge($status) {
+    $statusConfig = [
+        'pending' => ['class' => 'badge bg-warning text-dark', 'text' => 'Pending', 'icon' => 'clock-history'],
+        'scheduled' => ['class' => 'badge bg-info text-dark', 'text' => 'Scheduled', 'icon' => 'calendar-check'],
+        'completed' => ['class' => 'badge bg-success', 'text' => 'Completed', 'icon' => 'check-circle-fill'],
+        'rejected' => ['class' => 'badge bg-danger', 'text' => 'Rejected', 'icon' => 'x-circle-fill'],
+        'cancelled' => ['class' => 'badge bg-secondary', 'text' => 'Cancelled', 'icon' => 'dash-circle-fill'],
+    ];
+    
+    $config = $statusConfig[$status] ?? ['class' => 'badge bg-secondary', 'text' => ucwords(str_replace('_', ' ', $status)), 'icon' => 'circle-fill'];
+    return '<span class="' . $config['class'] . '"><i class="bi bi-' . $config['icon'] . ' me-1"></i>' . $config['text'] . '</span>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -303,6 +317,46 @@ $counts = [
             font-size: 0.75rem;
         }
         
+        /* Enhanced Status Badge Styles */
+        .badge {
+            padding: 7px 14px;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            border-radius: 6px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .badge i {
+    display: none !important;
+}
+
+        
+        .bg-warning {
+            background-color: #fbbf24 !important;
+        }
+        
+        .bg-info {
+            background-color: #0ea5e9 !important;
+        }
+        
+        .bg-success {
+            background-color: #10b981 !important;
+            color: white !important;
+        }
+        
+        .bg-danger {
+            background-color: var(--primary-red) !important;
+            color: white !important;
+        }
+        
+        .bg-secondary {
+            background-color: #6b7280 !important;
+            color: white !important;
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .content-wrapper {
@@ -395,7 +449,7 @@ $counts = [
                                 <?= htmlspecialchars($claim['requester_name']); ?><br>
                                 <small class="text-muted"><?= htmlspecialchars($claim['requester_email']); ?></small>
                             </td>
-                            <td><?= getStatusBadge($claim['status']); ?></td>
+                            <td><?= getColoredStatusBadge($claim['status']); ?></td>
                             <td>
                                 <?= $claim['schedule_date'] ? formatDateTime($claim['schedule_date']) : '<span class="text-muted">Not scheduled</span>'; ?>
                             </td>

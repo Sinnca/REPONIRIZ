@@ -98,6 +98,23 @@ if ($type === 'lost') {
         'rejected' => $pdo->query("SELECT COUNT(*) FROM found_items WHERE status = 'rejected'")->fetchColumn(),
     ];
 }
+
+// Custom function for colored status badges
+function getColoredStatusBadge($status) {
+    $statusConfig = [
+        'pending' => ['class' => 'badge bg-warning text-dark', 'text' => 'Pending'],
+        'verified' => ['class' => 'badge bg-primary', 'text' => 'Verified'],
+        'listed' => ['class' => 'badge bg-info text-dark', 'text' => 'Listed'],
+        'ready_for_claim' => ['class' => 'badge bg-cyan text-dark', 'text' => 'Ready for Claim'],
+        'claimed' => ['class' => 'badge bg-success', 'text' => 'Claimed'],
+        'returned' => ['class' => 'badge bg-success', 'text' => 'Returned'],
+        'rejected' => ['class' => 'badge bg-danger', 'text' => 'Rejected'],
+        'archived' => ['class' => 'badge bg-secondary', 'text' => 'Archived'],
+    ];
+    
+    $config = $statusConfig[$status] ?? ['class' => 'badge bg-secondary', 'text' => ucwords(str_replace('_', ' ', $status))];
+    return '<span class="' . $config['class'] . '">' . $config['text'] . '</span>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -431,6 +448,48 @@ if ($type === 'lost') {
             font-weight: 600;
         }
         
+        /* Enhanced Status Badge Styles */
+        .badge {
+            padding: 7px 14px;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            border-radius: 6px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        
+        .bg-warning {
+            background-color: #fbbf24 !important;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary-blue) !important;
+            color: white !important;
+        }
+        
+        .bg-info {
+            background-color: #0ea5e9 !important;
+        }
+        
+        .bg-cyan {
+            background-color: #06b6d4 !important;
+        }
+        
+        .bg-success {
+            background-color: #10b981 !important;
+            color: white !important;
+        }
+        
+        .bg-danger {
+            background-color: var(--primary-red) !important;
+            color: white !important;
+        }
+        
+        .bg-secondary {
+            background-color: #6b7280 !important;
+            color: white !important;
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .content-wrapper {
@@ -583,7 +642,7 @@ if ($type === 'lost') {
                                     <?= htmlspecialchars($item['submitter_name']); ?><br>
                                     <small class="text-muted"><?= htmlspecialchars($item['submitter_email']); ?></small>
                                 </td>
-                                <td><?= getStatusBadge($item['status']); ?></td>
+                                <td><?= getColoredStatusBadge($item['status']); ?></td>
                                 <td><?= formatDate($item['created_at']); ?></td>
                                 <td>
                                     <?php if ($type === 'lost'): ?>
