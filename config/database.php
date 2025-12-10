@@ -59,7 +59,7 @@
 // PARA SA NORMAL NA MYSQL 3306 PORT AND NO PASSOWRD, IF MAY PASSWORD EH LAGYAN MO
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'OnePiece');
 define('DB_NAME', 'lnf');
 
 // Create PDO connection
