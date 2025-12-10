@@ -77,6 +77,8 @@ $notifications = $stmtNotifications->fetchAll();
             --text-light: #6B7280;
             --white: #FFFFFF;
             --border-color: #E5E7EB;
+            --gold: #FDB813;
+            --navy: #002D72;
         }
 
         * {
@@ -86,46 +88,81 @@ $notifications = $stmtNotifications->fetchAll();
         }
 
         body {
-            background: linear-gradient(135deg, #F0F7FF 0%, #FFFFFF 50%, #E6F0FF 100%);
+            background: #F5F5F5;
             font-family: 'Inter', sans-serif;
             color: var(--text-dark);
             min-height: 100vh;
             font-size: 15px;
             line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(135deg, rgba(0, 102, 255, 0.02) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 102, 255, 0.01) 2px,
+                    rgba(0, 102, 255, 0.01) 4px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        main, nav, footer {
+            position: relative;
+            z-index: 1;
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         /* Navbar Styles */
         .navbar {
             background: var(--white);
-            box-shadow: 0 2px 20px rgba(0, 102, 255, 0.08);
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            border-bottom: 3px solid var(--primary-blue);
         }
 
         .navbar-brand {
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 800;
-            font-size: 1.6rem;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
+            font-size: 1.5rem;
+            color: var(--navy) !important;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+        }
+
+        .navbar-brand i {
+            color: var(--primary-blue);
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
         }
 
         .navbar-nav .nav-link {
             color: var(--text-dark) !important;
-            font-weight: 500;
-            font-size: 0.9rem;
-            margin: 0 0.3rem;
-            padding: 0.5rem 1rem !important;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin: 0 0.2rem;
+            padding: 0.6rem 1rem !important;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
 
         .navbar-nav .nav-link:hover {
@@ -134,42 +171,54 @@ $notifications = $stmtNotifications->fetchAll();
         }
 
         .navbar-nav .nav-link.active {
-            background: var(--secondary-blue);
-            color: var(--primary-blue) !important;
-            font-weight: 600;
+            background: var(--primary-blue);
+            color: var(--white) !important;
+            font-weight: 700;
         }
 
         .navbar-text {
-            color: var(--text-light) !important;
+            color: var(--text-dark) !important;
             font-weight: 500;
             font-size: 0.9rem;
         }
 
+        .navbar-text strong {
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
         /* Card Styles */
         .card {
-            border: none;
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0, 102, 255, 0.06);
+            border: 1px solid var(--border-color);
+            border-radius: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             background: var(--white);
             margin-bottom: 24px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            border-top: 4px solid var(--primary-blue);
         }
 
         .card:hover {
-            box-shadow: 0 8px 32px rgba(0, 102, 255, 0.12);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
             transform: translateY(-2px);
         }
 
         .card-header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-            color: var(--white);
-            border: none;
-            font-weight: 700;
-            font-size: 1.1rem;
+            background: var(--white);
+            color: var(--navy);
+            border-bottom: 2px solid var(--border-color);
+            font-weight: 800;
+            font-size: 1rem;
             padding: 1.2rem 1.5rem;
             font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        .card-header i {
+            color: var(--primary-blue);
+            margin-right: 0.5rem;
         }
 
         .card-body {
@@ -178,73 +227,62 @@ $notifications = $stmtNotifications->fetchAll();
 
         /* Stat Cards */
         .stat-card {
-            background: linear-gradient(135deg, var(--white) 0%, var(--light-blue) 100%);
-            border: 2px solid var(--secondary-blue);
-            border-radius: 20px;
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-left: 6px solid var(--primary-blue);
+            border-radius: 0;
             padding: 2rem;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
         }
 
         .stat-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
+            display: none;
         }
 
         .stat-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: var(--primary-blue);
-            box-shadow: 0 12px 40px rgba(0, 102, 255, 0.2);
+            transform: translateY(-4px);
+            border-left-color: var(--gold);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .stat-card h3 {
             font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 900;
+            color: var(--navy);
             margin-bottom: 0.5rem;
             font-family: 'Space Grotesk', sans-serif;
         }
 
         .stat-card p {
             color: var(--text-light);
-            font-weight: 600;
-            font-size: 0.95rem;
+            font-weight: 700;
+            font-size: 0.85rem;
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.08em;
+        }
+
+        .stat-card p i {
+            color: var(--primary-blue);
         }
 
         /* Table Styles */
         .table {
-            border-radius: 12px;
+            border-radius: 0;
             overflow: hidden;
             margin-bottom: 0;
         }
 
         .table thead th {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            background: var(--navy);
             color: var(--white);
             border: none;
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
             padding: 1rem;
         }
 
@@ -254,8 +292,7 @@ $notifications = $stmtNotifications->fetchAll();
         }
 
         .table tbody tr:hover {
-            background: var(--light-blue);
-            transform: scale(1.01);
+            background: #FAFAFA;
         }
 
         .table tbody td {
@@ -266,77 +303,79 @@ $notifications = $stmtNotifications->fetchAll();
 
         /* Button Styles */
         .btn {
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.9rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
             padding: 0.6rem 1.4rem;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             border: none;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+            background: var(--primary-blue);
+            box-shadow: 0 2px 4px rgba(0, 102, 255, 0.3);
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+            background: var(--dark-blue);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
         }
 
         .btn-success {
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            background: #10B981;
+            box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
         }
 
         .btn-success:hover {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            background: #059669;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, #6B7280 0%, #4B5563 100%);
-            box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+            background: #6B7280;
+            box-shadow: 0 2px 4px rgba(107, 114, 128, 0.3);
         }
 
         .btn-secondary:hover {
-            background: linear-gradient(135deg, #4B5563 0%, #374151 100%);
-            transform: translateY(-2px);
+            background: #4B5563;
+            transform: translateY(-1px);
         }
 
         .btn-info {
-            background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
-            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+            background: #0EA5E9;
+            box-shadow: 0 2px 4px rgba(14, 165, 233, 0.3);
         }
 
         .btn-info:hover {
-            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
-            transform: translateY(-2px);
+            background: #0284C7;
+            transform: translateY(-1px);
         }
 
         .btn-warning {
-            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            background: #F59E0B;
+            box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
         }
 
         .btn-warning:hover {
-            background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
-            transform: translateY(-2px);
+            background: #D97706;
+            transform: translateY(-1px);
         }
 
         .btn-outline-primary {
             border: 2px solid var(--primary-blue);
             color: var(--primary-blue);
             background: transparent;
+            font-weight: 700;
         }
 
         .btn-outline-primary:hover {
             background: var(--primary-blue);
             color: var(--white);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         /* Badge Styles */
@@ -352,20 +391,28 @@ $notifications = $stmtNotifications->fetchAll();
         .sidebar {
             background: var(--white);
             padding: 1.8rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 24px rgba(0, 102, 255, 0.08);
+            border-radius: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             border: 1px solid var(--border-color);
+            border-left: 4px solid var(--gold);
             position: sticky;
             top: 20px;
         }
 
         .sidebar h5 {
-            color: var(--primary-blue);
+            color: var(--navy);
             font-weight: 800;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-bottom: 1.5rem;
             font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .sidebar h5 i {
+            color: var(--gold);
         }
 
         .sidebar .btn {
@@ -373,47 +420,57 @@ $notifications = $stmtNotifications->fetchAll();
             margin-bottom: 0.8rem;
             justify-content: flex-start;
             text-align: left;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             padding: 0.8rem 1.2rem;
         }
 
         /* List Group Styles */
         .list-group-item {
             border: none;
-            background: var(--light-blue);
+            background: #FAFAFA;
+            border-left: 3px solid var(--primary-blue);
             margin-bottom: 0.6rem;
-            border-radius: 12px;
+            border-radius: 0;
             padding: 1rem 1.2rem;
             font-size: 0.9rem;
             transition: all 0.2s ease;
         }
 
         .list-group-item:hover {
-            background: var(--secondary-blue);
+            background: var(--light-blue);
             transform: translateX(4px);
+            border-left-color: var(--navy);
         }
 
         /* Section Title */
         .section-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--navy);
             margin-bottom: 1.5rem;
             text-align: center;
             font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: -0.8px;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        .section-title i {
+            color: var(--primary-blue);
         }
 
         /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            background: var(--navy);
             color: var(--white);
             font-weight: 500;
-            padding: 1.5rem 0;
+            padding: 2rem 0;
             margin-top: 3rem;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+            border-top: 3px solid var(--primary-blue);
+        }
+
+        footer i {
+            color: var(--gold);
         }
 
         /* Responsive */

@@ -45,6 +45,8 @@ $userName = getCurrentUserName();
             --border-color: #E5E7EB;
             --success: #10B981;
             --warning: #F59E0B;
+            --gold: #FDB813;
+            --navy: #002D72;
         }
 
         * {
@@ -55,44 +57,79 @@ $userName = getCurrentUserName();
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #F0F7FF 0%, #FFFFFF 50%, #E6F0FF 100%);
+            background: #F5F5F5;
             color: var(--text-dark);
             min-height: 100vh;
             font-size: 15px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(135deg, rgba(0, 102, 255, 0.02) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 102, 255, 0.01) 2px,
+                    rgba(0, 102, 255, 0.01) 4px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        main, nav, footer {
+            position: relative;
+            z-index: 1;
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         /* Navbar */
         .navbar {
             background: var(--white);
-            box-shadow: 0 2px 20px rgba(0, 102, 255, 0.08);
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            border-bottom: 3px solid var(--primary-blue);
         }
 
         .navbar-brand {
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 800;
-            font-size: 1.6rem;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
+            font-size: 1.5rem;
+            color: var(--navy) !important;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+        }
+
+        .navbar-brand i {
+            color: var(--primary-blue);
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
         }
 
         .navbar-nav .nav-link {
             color: var(--text-dark) !important;
-            font-weight: 500;
-            font-size: 0.9rem;
-            margin: 0 0.3rem;
-            padding: 0.5rem 1rem !important;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin: 0 0.2rem;
+            padding: 0.6rem 1rem !important;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
 
         .navbar-nav .nav-link:hover {
@@ -101,131 +138,147 @@ $userName = getCurrentUserName();
         }
 
         .navbar-nav .nav-link.active {
-            background: var(--secondary-blue);
-            color: var(--primary-blue) !important;
-            font-weight: 600;
+            background: var(--primary-blue);
+            color: var(--white) !important;
+            font-weight: 700;
         }
 
         .navbar-text {
-            color: var(--text-light) !important;
+            color: var(--text-dark) !important;
             font-weight: 500;
             font-size: 0.9rem;
+        }
+
+        .navbar-text strong {
+            color: var(--primary-blue);
+            font-weight: 700;
         }
 
         .btn-outline-light {
             border: 2px solid var(--primary-blue);
             color: var(--primary-blue);
             background: transparent;
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
         }
 
         .btn-outline-light:hover {
             background: var(--primary-blue);
             color: var(--white);
+            border-color: var(--primary-blue);
         }
 
         /* Main Content */
         main {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem 1rem;
             animation: fadeInUp 0.6s ease-out;
         }
 
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            align-items: start;
+        }
+
         .page-header {
             background: var(--white);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 24px rgba(0, 102, 255, 0.08);
+            padding: 2.5rem;
+            border-radius: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             margin-bottom: 2rem;
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
+            border-left: 6px solid var(--primary-blue);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .page-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            display: none;
         }
 
         .page-header h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--navy);
             margin: 0;
-            letter-spacing: -1px;
+            letter-spacing: -0.02em;
             display: flex;
             align-items: center;
+            text-transform: uppercase;
         }
 
         .page-header h1 i {
             margin-right: 1rem;
-            font-size: 2.2rem;
+            font-size: 2rem;
+            color: var(--primary-blue);
         }
 
         .page-header p {
             color: var(--text-light);
-            margin: 0.5rem 0 0 0;
+            margin: 0.8rem 0 0 0;
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 400;
+            line-height: 1.6;
         }
 
         /* Form Card */
         .form-card {
             background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 102, 255, 0.1);
+            border-radius: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             padding: 2.5rem;
             border: 1px solid var(--border-color);
             margin-bottom: 2rem;
+            border-top: 4px solid var(--primary-blue);
         }
 
         .form-label {
-            font-weight: 600;
-            color: var(--text-dark);
+            font-weight: 700;
+            color: var(--navy);
             margin-bottom: 0.6rem;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .form-label i {
-            margin-right: 0.5rem;
+            margin-right: 0.6rem;
             color: var(--primary-blue);
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .required-indicator {
-            color: #EF4444;
+            color: #DC2626;
             margin-left: 0.25rem;
+            font-weight: 900;
         }
 
         .form-control, .form-select {
             border: 2px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 4px;
             padding: 0.85rem 1rem;
             font-size: 0.95rem;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-weight: 500;
+            background: var(--white);
         }
 
         .form-control:focus, .form-select:focus {
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
             outline: none;
+            background: var(--white);
         }
 
         textarea.form-control {
             resize: vertical;
             min-height: 140px;
+            font-family: 'Inter', sans-serif;
         }
 
         .form-text {
@@ -233,32 +286,36 @@ $userName = getCurrentUserName();
             font-size: 0.85rem;
             margin-top: 0.5rem;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            font-style: italic;
         }
 
         .form-text i {
             margin-right: 0.5rem;
             font-size: 0.9rem;
+            margin-top: 0.1rem;
+            flex-shrink: 0;
         }
 
         /* Image Preview */
         #image-preview {
             max-width: 250px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.15);
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             margin-top: 1rem;
             border: 2px solid var(--border-color);
         }
 
         /* Buttons */
         .btn {
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.95rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.9rem;
             padding: 0.75rem 1.8rem;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             border: none;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
         .btn i {
@@ -266,95 +323,112 @@ $userName = getCurrentUserName();
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+            background: var(--primary-blue);
+            box-shadow: 0 2px 4px rgba(0, 102, 255, 0.3);
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+            background: var(--dark-blue);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, #6B7280 0%, #4B5563 100%);
-            box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+            background: #6B7280;
+            box-shadow: 0 2px 4px rgba(107, 114, 128, 0.3);
         }
 
         .btn-secondary:hover {
-            background: linear-gradient(135deg, #4B5563 0%, #374151 100%);
-            transform: translateY(-2px);
+            background: #4B5563;
+            transform: translateY(-1px);
         }
 
         /* Tips Section */
         .tips-section {
             background: var(--white);
-            border-radius: 20px;
+            border-radius: 0;
             padding: 2rem;
-            box-shadow: 0 4px 24px rgba(0, 102, 255, 0.08);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             border: 1px solid var(--border-color);
+            position: sticky;
+            top: 2rem;
+            border-left: 4px solid var(--gold);
         }
 
         .tips-section h2 {
-            color: var(--primary-blue);
+            color: var(--navy);
             font-weight: 800;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             margin-bottom: 1.5rem;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.02em;
             display: flex;
             align-items: center;
+            text-transform: uppercase;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
         }
 
         .tips-section h2 i {
             margin-right: 0.8rem;
-            font-size: 2rem;
+            font-size: 1.6rem;
+            color: var(--gold);
         }
 
         .list-group {
-            border-radius: 12px;
+            border-radius: 0;
             overflow: hidden;
         }
 
         .list-group-item {
             border: none;
-            background: var(--light-blue);
-            margin-bottom: 0.8rem;
-            border-radius: 12px;
-            padding: 1.2rem 1.5rem;
+            background: #FAFAFA;
+            margin-bottom: 0.6rem;
+            border-radius: 0;
+            border-left: 3px solid var(--primary-blue);
+            padding: 1rem 1.2rem;
             color: var(--text-dark);
             font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
             display: flex;
             align-items: flex-start;
         }
 
         .list-group-item::before {
-            content: '\f26a';
-            font-family: 'bootstrap-icons';
+            content: '→';
             color: var(--primary-blue);
-            margin-right: 1rem;
+            margin-right: 0.8rem;
             font-size: 1.2rem;
-            font-weight: 700;
+            font-weight: 900;
             flex-shrink: 0;
         }
 
         .list-group-item:hover {
-            background: var(--secondary-blue);
-            transform: translateX(8px);
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.1);
+            background: var(--light-blue);
+            transform: translateX(4px);
+            border-left-color: var(--navy);
         }
 
         /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            background: var(--navy);
             color: var(--white);
-            padding: 1.5rem 0;
+            padding: 2rem 0;
             margin-top: 3rem;
-            box-shadow: 0 -2px 20px rgba(0, 102, 255, 0.1);
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+            border-top: 3px solid var(--primary-blue);
+        }
+
+        footer p {
+            margin: 0;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
         }
 
         footer i {
             margin-right: 0.5rem;
+            color: var(--gold);
         }
 
         /* Alert Container */
@@ -363,23 +437,25 @@ $userName = getCurrentUserName();
         }
 
         .alert {
-            border: none;
-            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 0;
             padding: 1rem 1.5rem;
             font-weight: 500;
             animation: slideIn 0.5s ease-out;
         }
 
         .alert-success {
-            background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+            background: #D1FAE5;
             color: #065F46;
             border-left: 4px solid var(--success);
+            border-radius: 0;
         }
 
         .alert-danger {
-            background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+            background: #FEE2E2;
             color: #991B1B;
-            border-left: 4px solid #EF4444;
+            border-left: 4px solid #DC2626;
+            border-radius: 0;
         }
 
         /* Animations */
@@ -417,6 +493,7 @@ $userName = getCurrentUserName();
 
             .tips-section {
                 padding: 1.5rem;
+                position: static;
             }
 
             .btn {
@@ -427,6 +504,10 @@ $userName = getCurrentUserName();
             .navbar-brand {
                 font-size: 1.3rem;
             }
+
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* File input styling */
@@ -435,19 +516,22 @@ $userName = getCurrentUserName();
         }
 
         .form-control[type="file"]::file-selector-button {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            background: var(--primary-blue);
             color: var(--white);
             border: none;
             padding: 0.5rem 1.2rem;
-            border-radius: 8px;
-            font-weight: 600;
+            border-radius: 4px;
+            font-weight: 700;
             margin-right: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
         }
 
         .form-control[type="file"]::file-selector-button:hover {
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            background: var(--dark-blue);
             transform: translateY(-1px);
         }
 
@@ -463,6 +547,21 @@ $userName = getCurrentUserName();
             margin-top: 2rem;
             padding-top: 1.5rem;
             border-top: 2px solid var(--border-color);
+        }
+
+        /* Academic accent elements */
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-blue) 0%, var(--gold) 100%);
+        }
+
+        .form-card {
+            position: relative;
         }
 
         @media (max-width: 576px) {
@@ -484,8 +583,8 @@ $userName = getCurrentUserName();
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link active" href="index.php"><i class="bi bi-speedometer2 me-1"></i>Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="report_lost.php"><i class="bi bi-exclamation-circle me-1"></i>Report Lost</a></li>
+                <li class="nav-item"><a class="nav-link " href="index.php"><i class="bi bi-speedometer2 me-1"></i>Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link active" href="report_lost.php"><i class="bi bi-exclamation-circle me-1"></i>Report Lost</a></li>
                 <li class="nav-item"><a class="nav-link" href="report_found.php"><i class="bi bi-check-circle me-1"></i>Report Found</a></li>
                 <li class="nav-item"><a class="nav-link" href="lost_items.php"><i class="bi bi-search me-1"></i>Browse Lost</a></li>
                 <li class="nav-item"><a class="nav-link" href="found_items.php"><i class="bi bi-archive me-1"></i>Browse Found</a></li>
@@ -506,102 +605,109 @@ $userName = getCurrentUserName();
 
     <div id="alertContainer"></div>
 
-    <!-- Form Card -->
-    <form method="POST" action="" enctype="multipart/form-data" id="lostItemForm" class="form-card">
-        <div class="mb-3">
-            <label for="item_name" class="form-label">
-                <i class="bi bi-tag-fill"></i>Item Name<span class="required-indicator">*</span>
-            </label>
-            <input type="text" class="form-control" id="item_name" name="item_name"
-                   placeholder="e.g., Black iPhone 13, Blue Backpack, Keys with Red Keychain" required>
+    <div class="content-wrapper">
+        <!-- Left Column: Form -->
+        <div>
+            <!-- Form Card -->
+            <form method="POST" action="" enctype="multipart/form-data" id="lostItemForm" class="form-card">
+                <div class="mb-3">
+                    <label for="item_name" class="form-label">
+                        <i class="bi bi-tag-fill"></i>Item Name<span class="required-indicator">*</span>
+                    </label>
+                    <input type="text" class="form-control" id="item_name" name="item_name"
+                           placeholder="e.g., Black iPhone 13, Blue Backpack, Keys with Red Keychain" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">
+                        <i class="bi bi-file-text-fill"></i>Description<span class="required-indicator">*</span>
+                    </label>
+                    <textarea class="form-control" id="description" name="description" rows="5"
+                              placeholder="Provide detailed description including distinctive features, brand, color, size, any unique markings, scratches, or stickers..." required></textarea>
+                    <small class="form-text">
+                        <i class="bi bi-info-circle-fill"></i>
+                        Be as specific as possible to help identify your item and distinguish it from similar items.
+                    </small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="date_lost" class="form-label">
+                        <i class="bi bi-calendar-event-fill"></i>Date Lost<span class="required-indicator">*</span>
+                    </label>
+                    <input type="date" class="form-control" id="date_lost" name="date_lost" max="<?php echo date('Y-m-d'); ?>" required>
+                    <small class="form-text">
+                        <i class="bi bi-info-circle-fill"></i>
+                        Select the approximate date when you lost this item.
+                    </small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="photo" class="form-label">
+                        <i class="bi bi-image-fill"></i>Photo <span style="color: var(--text-light); font-weight: 500;">(Optional)</span>
+                    </label>
+                    <input type="file" class="form-control" id="photo" name="photo" accept="image/jpeg,image/png,image/jpg,image/gif">
+                    <small class="form-text">
+                        <i class="bi bi-info-circle-fill"></i>
+                        Max file size: 5MB. Accepted formats: JPG, PNG, GIF. A photo helps identify your item faster.
+                    </small>
+                    <img id="image-preview" class="img-fluid" style="display:none;">
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-send-fill"></i>Submit Lost Item Report
+                    </button>
+                    <a href="index.php" class="btn btn-secondary">
+                        <i class="bi bi-x-circle-fill"></i>Cancel
+                    </a>
+                </div>
+            </form>
+
+            <script>
+                document.getElementById('lostItemForm').addEventListener('submit', async function(e) {
+                    e.preventDefault();
+
+                    // Validate form
+                    if (!FormValidation.validateLostItem(this)) {
+                        return;
+                    }
+
+                    await LSF.FormHandlers.submitLostItem(this);
+                });
+
+                // Image preview
+                document.getElementById('photo').addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    const preview = document.getElementById('image-preview');
+                    
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            preview.src = e.target.result;
+                            preview.style.display = 'block';
+                        }
+                        reader.readAsDataURL(file);
+                    } else {
+                        preview.style.display = 'none';
+                    }
+                });
+            </script>
         </div>
 
-        <div class="mb-3">
-            <label for="description" class="form-label">
-                <i class="bi bi-file-text-fill"></i>Description<span class="required-indicator">*</span>
-            </label>
-            <textarea class="form-control" id="description" name="description" rows="5"
-                      placeholder="Provide detailed description including distinctive features, brand, color, size, any unique markings, scratches, or stickers..." required></textarea>
-            <small class="form-text">
-                <i class="bi bi-info-circle-fill"></i>
-                Be as specific as possible to help identify your item and distinguish it from similar items.
-            </small>
-        </div>
-
-        <div class="mb-3">
-            <label for="date_lost" class="form-label">
-                <i class="bi bi-calendar-event-fill"></i>Date Lost<span class="required-indicator">*</span>
-            </label>
-            <input type="date" class="form-control" id="date_lost" name="date_lost" max="<?php echo date('Y-m-d'); ?>" required>
-            <small class="form-text">
-                <i class="bi bi-info-circle-fill"></i>
-                Select the approximate date when you lost this item.
-            </small>
-        </div>
-
-        <div class="mb-3">
-            <label for="photo" class="form-label">
-                <i class="bi bi-image-fill"></i>Photo <span style="color: var(--text-light); font-weight: 500;">(Optional)</span>
-            </label>
-            <input type="file" class="form-control" id="photo" name="photo" accept="image/jpeg,image/png,image/jpg,image/gif">
-            <small class="form-text">
-                <i class="bi bi-info-circle-fill"></i>
-                Max file size: 5MB. Accepted formats: JPG, PNG, GIF. A photo helps identify your item faster.
-            </small>
-            <img id="image-preview" class="img-fluid" style="display:none;">
-        </div>
-
-        <div class="button-group">
-            <button type="submit" class="btn btn-primary">
-                <i class="bi bi-send-fill"></i>Submit Lost Item Report
-            </button>
-            <a href="index.php" class="btn btn-secondary">
-                <i class="bi bi-x-circle-fill"></i>Cancel
-            </a>
-        </div>
-    </form>
-
-    <script>
-        document.getElementById('lostItemForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            // Validate form
-            if (!FormValidation.validateLostItem(this)) {
-                return;
-            }
-
-            await LSF.FormHandlers.submitLostItem(this);
-        });
-
-        // Image preview
-        document.getElementById('photo').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            const preview = document.getElementById('image-preview');
-            
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            } else {
-                preview.style.display = 'none';
-            }
-        });
-    </script>
-
-    <!-- Tips Section -->
-    <section class="tips-section">
-        <h2><i class="bi bi-lightbulb-fill"></i>Tips for Reporting Lost Items</h2>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Provide as much detail as possible about your item including brand, model, color, and size</li>
-            <li class="list-group-item">Include unique identifiers such as serial numbers, scratches, stickers, or custom modifications</li>
-            <li class="list-group-item">Upload a clear photo if available - this significantly increases the chance of recovery</li>
-            <li class="list-group-item">Specify the approximate date when you lost the item to help narrow down the search</li>
-            <li class="list-group-item">Check back regularly for matching found items and respond promptly to any notifications</li>
-        </ul>
-    </section>
+        <!-- Right Column: Tips Section -->
+        <aside>
+            <section class="tips-section">
+                <h2><i class="bi bi-lightbulb-fill"></i>Tips</h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Provide as much detail as possible about your item including brand, model, color, and size</li>
+                    <li class="list-group-item">Include unique identifiers such as serial numbers, scratches, stickers, or custom modifications</li>
+                    <li class="list-group-item">Upload a clear photo if available - this significantly increases the chance of recovery</li>
+                    <li class="list-group-item">Specify the approximate date when you lost the item to help narrow down the search</li>
+                    <li class="list-group-item">Check back regularly for matching found items and respond promptly to any notifications</li>
+                </ul>
+            </section>
+        </aside>
+    </div>
 </main>
 
 <footer class="text-center">
