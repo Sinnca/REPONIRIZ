@@ -28,8 +28,261 @@ $pendingItems = $stmt->fetchAll();
     <title>Pending Found Items - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/admin_pendingfound.css">
- 
+    <style>
+        :root {
+            --primary-yellow: #F7C506;
+            --primary-blue: #003DA5;
+            --primary-red: #C8102E;
+            --bg-primary: #f8f9fa;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+        }
+        
+        body {
+            background: var(--bg-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+        }cd
+        
+        .content-wrapper {
+            padding: 40px 50px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 0;
+        }
+        
+        .page-header {
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .count-badge {
+            display: inline-block;
+            background: var(--primary-yellow);
+            color: #1f2937;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            margin-left: 12px;
+        }
+        
+        .card {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            background: white;
+            transition: all 0.2s ease;
+            margin-bottom: 24px;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        img.thumb { 
+            width: 60px; 
+            height: 60px; 
+            object-fit: cover; 
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease;
+        }
+        
+        img.thumb:hover {
+            transform: scale(1.5);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        
+        .table {
+            margin-bottom: 0;
+        }
+        
+        .table thead th {
+            border-bottom: 2px solid var(--border-color);
+            border-top: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            padding: 14px 12px;
+            background: #f9fafb;
+        }
+        
+        .table tbody tr {
+            transition: background 0.15s ease;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .table tbody tr:hover {
+            background: #f9fafb;
+        }
+        
+        .table tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        .table tbody td {
+            padding: 16px 12px;
+            vertical-align: middle;
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+        }
+        
+        .table-responsive {
+            border-radius: 8px;
+        }
+        
+        .btn {
+            border-radius: 6px;
+            font-weight: 500;
+            padding: 7px 16px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            font-size: 0.875rem;
+        }
+        
+        .btn-success {
+            background: var(--primary-yellow);
+            color: #1f2937;
+            border-color: var(--primary-yellow);
+        }
+        
+        .btn-success:hover {
+            background: #e6b505;
+            border-color: #e6b505;
+            color: #1f2937;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(247, 197, 6, 0.25);
+        }
+        
+        .badge-info { 
+            background: linear-gradient(135deg, var(--primary-blue), #0052d4);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.8125rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .badge-linked {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.8125rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .alert {
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            background: white;
+        }
+        
+        .alert-info {
+            border-left: 4px solid var(--primary-blue);
+            background: #f0f7ff;
+            color: var(--text-primary);
+        }
+        
+        .text-muted {
+            color: var(--text-secondary) !important;
+            font-size: 0.875rem;
+        }
+        
+        .guidelines-section {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--primary-blue);
+        }
+        
+        .guidelines-section h4 {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .guidelines-section ul {
+            margin-bottom: 0;
+            padding-left: 24px;
+        }
+        
+        .guidelines-section li {
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .guidelines-section li::marker {
+            color: var(--primary-blue);
+        }
+        
+        footer {
+            background: var(--primary-blue);
+            color: white;
+            text-align: center;
+            padding: 24px;
+            margin-top: 48px;
+            font-size: 0.9375rem;
+        }
+        
+        .no-image-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 24px 20px;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .count-badge {
+                display: block;
+                margin-left: 0;
+                margin-top: 8px;
+                width: fit-content;
+            }
+        }
+    </style>
 </head>
 <body class="bg-light">
 
