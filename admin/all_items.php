@@ -1,4 +1,4 @@
-<?php
+<?php global $pdo;
 /**
  * Admin - All Items Management
  * View all lost and found items in the system

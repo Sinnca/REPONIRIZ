@@ -43,7 +43,7 @@ $pendingItems = $stmt->fetchAll();
             background: var(--bg-primary);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             color: var(--text-primary);
-        }
+        }cd
         
         .content-wrapper {
             padding: 40px 50px;
