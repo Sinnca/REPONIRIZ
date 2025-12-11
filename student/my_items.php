@@ -56,7 +56,7 @@ $claimRequests = $stmtClaims->fetchAll();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="../assets/js/main.js" defer></script>
+    
     <style>
         :root {
             --primary-blue: #0066FF;
@@ -735,9 +735,17 @@ $claimRequests = $stmtClaims->fetchAll();
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- LOAD MAIN.JS FIRST - BEFORE ANY INLINE SCRIPTS -->
+<script src="../assets/js/main.js"></script>
+
+<!-- NOW THE DELETE FUNCTIONS WILL WORK BECAUSE LSF IS LOADED -->
 <script>
-    async function deleteLostItem(id){ await LSF.FormHandlers.deleteItem(id,'lost'); }
-    async function deleteFoundItem(id){ await LSF.FormHandlers.deleteItem(id,'found'); }
+    async function deleteLostItem(id){ 
+        await LSF.FormHandlers.deleteItem(id,'lost'); 
+    }
+    async function deleteFoundItem(id){ 
+        await LSF.FormHandlers.deleteItem(id,'found'); 
+    }
 </script>
 
 <footer class="text-center">
