@@ -53,6 +53,7 @@ $lostItems = $stmt->fetchAll();
             --border-color: #E5E7EB;
             --success: #10B981;
             --warning: #F59E0B;
+            --danger: #DC2626;
             --gold: #FDB813;
             --navy: #002D72;
         }
@@ -180,9 +181,9 @@ $lostItems = $stmt->fetchAll();
 
         /* Main Content */
         main {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 2rem 1rem 4rem;
+            padding: 2rem 1.5rem 4rem;
             animation: fadeInUp 0.6s ease-out;
         }
 
@@ -191,7 +192,7 @@ $lostItems = $stmt->fetchAll();
             padding: 2.5rem;
             border-radius: 0;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             border-left: 6px solid var(--primary-blue);
             border-bottom: 1px solid var(--border-color);
         }
@@ -213,7 +214,25 @@ $lostItems = $stmt->fetchAll();
             line-height: 1.6;
         }
 
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 450px;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .items-section {
+            min-width: 0;
+        }
+
         /* Item Cards */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2.5rem;
+        }
+
         .card {
             border: 1px solid var(--border-color);
             border-radius: 0;
@@ -228,76 +247,82 @@ $lostItems = $stmt->fetchAll();
         }
 
         .card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-6px);
             border-top-color: var(--gold);
         }
 
         .card-img-top {
-            height: 220px;
+            height: 300px;
             object-fit: cover;
             border-bottom: 2px solid var(--border-color);
         }
 
         .card .bg-secondary {
-            height: 220px;
+            height: 300px;
             background: #E5E7EB !important;
             border-bottom: 2px solid var(--border-color);
         }
 
         .card-body {
-            padding: 1.5rem;
+            padding: 2.5rem;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
 
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: var(--navy);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
             text-transform: uppercase;
+            line-height: 1.3;
         }
 
         .card-text {
             color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            line-height: 1.6;
+            font-size: 1.05rem;
+            margin-bottom: 1.8rem;
+            line-height: 1.8;
             flex: 1;
         }
 
         .card-body p {
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
             color: var(--text-dark);
+            line-height: 1.6;
         }
 
         .card-body strong {
             color: var(--navy);
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             letter-spacing: 0.05em;
         }
 
         .card-footer {
             background: #FAFAFA;
             border-top: 2px solid var(--border-color);
-            padding: 1rem 1.5rem;
-            font-size: 0.85rem;
-            color: var(--text-light);
+            padding: 1.2rem 2.5rem;
+            font-size: 0.95rem;
+            color: var(--text-dark);
             font-weight: 600;
+        }
+
+        .card-footer i {
+            color: var(--primary-blue);
         }
 
         /* Buttons */
         .btn {
             border-radius: 4px;
             font-weight: 700;
-            font-size: 0.8rem;
-            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            padding: 0.65rem 1.5rem;
             transition: all 0.2s ease;
             border: none;
             letter-spacing: 0.05em;
@@ -305,8 +330,8 @@ $lostItems = $stmt->fetchAll();
         }
 
         .btn-sm {
-            padding: 0.4rem 1rem;
-            font-size: 0.75rem;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.8rem;
         }
 
         .btn-info {
@@ -317,7 +342,8 @@ $lostItems = $stmt->fetchAll();
 
         .btn-info:hover {
             background: #0284C7;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(14, 165, 233, 0.4);
             color: var(--white);
         }
 
@@ -329,14 +355,15 @@ $lostItems = $stmt->fetchAll();
 
         .btn-success:hover {
             background: #059669;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
             color: var(--white);
         }
 
         /* Badge Styles */
         .badge {
-            padding: 0.4rem 0.8rem;
-            font-size: 0.7rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -353,31 +380,65 @@ $lostItems = $stmt->fetchAll();
             color: var(--white) !important;
         }
 
+        .bg-info {
+            background: #0EA5E9 !important;
+            color: var(--white) !important;
+        }
+
+        .bg-success {
+            background: var(--success) !important;
+            color: var(--white) !important;
+        }
+
+        .bg-danger {
+            background: #DC2626 !important;
+            color: var(--white) !important;
+        }
+
+        .bg-primary {
+            background: var(--primary-blue) !important;
+            color: var(--white) !important;
+        }
+
+        /* Card actions */
+        .card-actions {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--border-color);
+        }
+
         /* Info Section */
         .info-section {
             background: var(--white);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 0;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             border: 1px solid var(--border-color);
             border-left: 4px solid var(--gold);
-            margin-top: 3rem;
+            position: sticky;
+            top: 2rem;
         }
 
         .info-section h2 {
             color: var(--navy);
             font-weight: 800;
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
             text-transform: uppercase;
+            padding-bottom: 1.2rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .info-section h2 i {
+            color: var(--gold);
         }
 
         .info-section p {
             color: var(--text-light);
             font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 0.8rem;
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
         }
 
         .info-section a {
@@ -395,7 +456,7 @@ $lostItems = $stmt->fetchAll();
         /* Empty State */
         .empty-state {
             background: var(--white);
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
             border-radius: 0;
             border: 2px dashed var(--border-color);
@@ -403,14 +464,14 @@ $lostItems = $stmt->fetchAll();
         }
 
         .empty-state i {
-            font-size: 4rem;
+            font-size: 5rem;
             color: var(--primary-blue);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .empty-state p {
             color: var(--text-light);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin: 0;
             font-weight: 500;
         }
@@ -420,7 +481,7 @@ $lostItems = $stmt->fetchAll();
             background: var(--navy);
             color: var(--white);
             padding: 2rem 0;
-            margin-top: 3rem;
+            margin-top: 4rem;
             box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
             border-top: 3px solid var(--primary-blue);
         }
@@ -442,14 +503,33 @@ $lostItems = $stmt->fetchAll();
             }
         }
 
-        /* Grid Responsive */
-        .items-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .content-wrapper {
+                grid-template-columns: 1fr 400px;
+                gap: 2.5rem;
+            }
+            
+            .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            }
         }
 
-        /* Responsive */
+        @media (max-width: 1200px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-section {
+                position: static;
+                margin-top: 3rem;
+            }
+            
+            .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
             .page-header {
                 padding: 1.5rem;
@@ -465,36 +545,24 @@ $lostItems = $stmt->fetchAll();
 
             .items-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 2rem;
             }
-        }
-
-        /* Status badges from functions.php */
-        .badge.bg-info {
-            background: #0EA5E9 !important;
-            color: var(--white) !important;
-        }
-
-        .badge.bg-success {
-            background: var(--success) !important;
-            color: var(--white) !important;
-        }
-
-        .badge.bg-danger {
-            background: #DC2626 !important;
-            color: var(--white) !important;
-        }
-
-        .badge.bg-primary {
-            background: var(--primary-blue) !important;
-            color: var(--white) !important;
-        }
-
-        /* Card actions */
-        .card-actions {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
+            
+            .card-body {
+                padding: 1.8rem;
+            }
+            
+            .card-footer {
+                padding: 1rem 1.8rem;
+            }
+            
+            .info-section {
+                padding: 1.8rem;
+            }
+            
+            main {
+                padding: 1.5rem 1rem 3rem;
+            }
         }
     </style>
 </head>
@@ -522,88 +590,99 @@ $lostItems = $stmt->fetchAll();
     </div>
 </nav>
 
-<main class="container">
+<main class="container-fluid">
     <!-- Page Header -->
     <div class="page-header">
         <h1><i class="bi bi-search me-2"></i>Browse Lost Items</h1>
         <p>If you found any of these items, click "I Found This Item" to report it and help reunite it with its owner.</p>
     </div>
 
-    <?php if (count($lostItems) > 0): ?>
-        <div class="items-grid">
-            <?php foreach ($lostItems as $item): ?>
-                <div class="card">
-                    <?php if ($item['photo']): ?>
-                        <img src="<?php echo getImageUrl($item['photo'], 'lost'); ?>"
-                             class="card-img-top" alt="<?php echo htmlspecialchars($item['item_name']); ?>">
-                    <?php else: ?>
-                        <div class="bg-secondary text-dark d-flex align-items-center justify-content-center">
-                            <div class="text-center">
-                                <i class="bi bi-image" style="font-size: 3rem; color: #9CA3AF;"></i>
-                                <p class="mb-0 mt-2" style="color: #6B7280; font-weight: 600;">No Image Available</p>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo htmlspecialchars($item['item_name']); ?></h5>
-                        <p class="card-text"><?php echo htmlspecialchars(substr($item['description'], 0, 100)) . '...'; ?></p>
-                        <p class="mb-1"><strong>Date Lost:</strong> <?php echo formatDate($item['date_lost']); ?></p>
-                        <p class="mb-2"><strong>Status:</strong> <?php echo getStatusBadge($item['status']); ?></p>
-                        
-                        <div class="card-actions">
-                            <a href="view_lost_item.php?id=<?php echo $item['id']; ?>" class="btn btn-sm btn-info me-1 mb-1">
-                                <i class="bi bi-eye me-1"></i>View Details
-                            </a>
+    <div class="content-wrapper">
+        <!-- Left Column: Items Grid -->
+        <div class="items-section">
+            <?php if (count($lostItems) > 0): ?>
+                <div class="items-grid">
+                    <?php foreach ($lostItems as $item): ?>
+                        <div class="card">
+                            <?php if ($item['photo']): ?>
+                                <img src="<?php echo getImageUrl($item['photo'], 'lost'); ?>"
+                                     class="card-img-top" alt="<?php echo htmlspecialchars($item['item_name']); ?>">
+                            <?php else: ?>
+                                <div class="bg-secondary text-dark d-flex align-items-center justify-content-center">
+                                    <div class="text-center">
+                                        <i class="bi bi-image" style="font-size: 3.5rem; color: #9CA3AF;"></i>
+                                        <p class="mb-0 mt-2" style="color: #6B7280; font-weight: 600; font-size: 0.95rem;">No Image Available</p>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo htmlspecialchars($item['item_name']); ?></h5>
+                                <p class="card-text"><?php echo htmlspecialchars(substr($item['description'], 0, 120)) . '...'; ?></p>
+                                <p class="mb-1"><strong>Date Lost:</strong> <?php echo formatDate($item['date_lost']); ?></p>
+                                <p class="mb-2"><strong>Status:</strong> <?php echo getStatusBadge($item['status']); ?></p>
+                                
+                                <div class="card-actions">
+                                    <a href="view_lost_item.php?id=<?php echo $item['id']; ?>" class="btn btn-sm btn-info me-2 mb-2">
+                                        <i class="bi bi-eye me-1"></i>View Details
+                                    </a>
 
-                            <?php if ($item['status'] === 'listed'): ?>
-                                <?php if ($item['user_id'] != $userId): ?>
-                                    <?php
-                                    // Check if the current user already reported this lost item as found
-                                    $stmtCheck = $pdo->prepare("SELECT id FROM found_items WHERE user_id = ? AND lost_item_id = ? LIMIT 1");
-                                    $stmtCheck->execute([$userId, $item['id']]);
-                                    $alreadyReported = $stmtCheck->fetch();
-                                    ?>
-                                    <?php if (!$alreadyReported): ?>
-                                        <a href="report_found.php?lost_item_id=<?php echo $item['id']; ?>"
-                                           class="btn btn-sm btn-success mb-1">
-                                           <i class="bi bi-hand-thumbs-up me-1"></i>I Found This Item
-                                        </a>
-                                    <?php else: ?>
-                                        <span class="badge bg-warning mb-1">
-                                            <i class="bi bi-check-circle me-1"></i>Already Reported as Found
+                                    <?php if ($item['status'] === 'listed'): ?>
+                                        <?php if ($item['user_id'] != $userId): ?>
+                                            <?php
+                                            // Check if the current user already reported this lost item as found
+                                            $stmtCheck = $pdo->prepare("SELECT id FROM found_items WHERE user_id = ? AND lost_item_id = ? LIMIT 1");
+                                            $stmtCheck->execute([$userId, $item['id']]);
+                                            $alreadyReported = $stmtCheck->fetch();
+                                            ?>
+                                            <?php if (!$alreadyReported): ?>
+                                                <a href="report_found.php?lost_item_id=<?php echo $item['id']; ?>"
+                                                   class="btn btn-sm btn-success mb-2">
+                                                   <i class="bi bi-hand-thumbs-up me-1"></i>I Found This Item
+                                                </a>
+                                            <?php else: ?>
+                                                <span class="badge bg-warning mb-2">
+                                                    <i class="bi bi-check-circle me-1"></i>Already Reported as Found
+                                                </span>
+                                            <?php endif; ?>
+                                        <?php else: ?>
+                                            <span class="badge bg-secondary mb-2">
+                                                <i class="bi bi-person-check me-1"></i>You reported this item
+                                            </span>
+                                        <?php endif; ?>
+                                    <?php elseif ($item['status'] === 'ready_for_claim'): ?>
+                                        <span class="badge bg-warning mb-2">
+                                            <i class="bi bi-exclamation-triangle me-1"></i>Match Found
                                         </span>
                                     <?php endif; ?>
-                                <?php else: ?>
-                                    <span class="badge bg-secondary mb-1">
-                                        <i class="bi bi-person-check me-1"></i>You reported this item
-                                    </span>
-                                <?php endif; ?>
-                            <?php elseif ($item['status'] === 'ready_for_claim'): ?>
-                                <span class="badge bg-warning mb-1">
-                                    <i class="bi bi-exclamation-triangle me-1"></i>Match Found
-                                </span>
-                            <?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <i class="bi bi-person-circle me-1"></i>Reported by: <?php echo htmlspecialchars($item['owner_name']); ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <i class="bi bi-person-circle me-1"></i>Reported by: <?php echo htmlspecialchars($item['owner_name']); ?>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-            <?php endforeach; ?>
+            <?php else: ?>
+                <div class="empty-state">
+                    <i class="bi bi-inbox"></i>
+                    <p>No lost items currently listed.</p>
+                </div>
+            <?php endif; ?>
         </div>
-    <?php else: ?>
-        <div class="empty-state">
-            <i class="bi bi-inbox"></i>
-            <p>No lost items currently listed.</p>
-        </div>
-    <?php endif; ?>
 
-    <!-- Info Section -->
-    <section class="info-section">
-        <h2><i class="bi bi-question-circle me-2"></i>Found Something?</h2>
-        <p>If you found an item that matches one of the listings above, click <strong>"I Found This Item"</strong> to help reunite it with its owner. Your report will be verified by the admin before connecting you with the item's owner.</p>
-        <p>Don't see a matching item? You can still <a href="report_found.php">report your found item</a> directly, and we'll help match it with its rightful owner.</p>
-    </section>
+        <!-- Right Column: Info Section -->
+        <aside>
+            <section class="info-section">
+                <h2><i class="bi bi-question-circle me-2"></i>Found Something?</h2>
+                <p>If you found an item that matches one of the listings above, click <strong>"I Found This Item"</strong> to help reunite it with its owner.</p>
+                <p>Your report will be verified by the admin before connecting you with the item's owner.</p>
+                <p style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid var(--border-color);">
+                    <i class="bi bi-info-circle me-1" style="color: var(--primary-blue);"></i>
+                    Don't see a matching item? You can still <a href="report_found.php">report your found item</a> directly, and we'll help match it with its rightful owner.
+                </p>
+            </section>
+        </aside>
+    </div>
 </main>
 
 <footer class="text-center">

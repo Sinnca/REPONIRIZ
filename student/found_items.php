@@ -201,9 +201,9 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
 
         /* Main Content */
         main {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 2rem 1rem 4rem;
+            padding: 2rem 1.5rem 4rem;
             animation: fadeInUp 0.6s ease-out;
         }
 
@@ -212,7 +212,7 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
             padding: 2.5rem;
             border-radius: 0;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             border-left: 6px solid var(--primary-blue);
             border-bottom: 1px solid var(--border-color);
         }
@@ -234,7 +234,25 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
             line-height: 1.6;
         }
 
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 450px;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .items-section {
+            min-width: 0;
+        }
+
         /* Item Cards */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2.5rem;
+        }
+
         .card {
             border: 1px solid var(--border-color);
             border-radius: 0;
@@ -249,58 +267,60 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
         }
 
         .card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-6px);
             border-top-color: var(--gold);
         }
 
         .card-img-top {
-            height: 220px;
+            height: 300px;
             object-fit: cover;
             border-bottom: 2px solid var(--border-color);
         }
 
         .card .bg-secondary {
-            height: 220px;
+            height: 300px;
             background: #E5E7EB !important;
             border-bottom: 2px solid var(--border-color);
         }
 
         .card-body {
-            padding: 1.5rem;
+            padding: 2.5rem;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
 
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: var(--navy);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
             text-transform: uppercase;
+            line-height: 1.3;
         }
 
         .card-text {
             color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            line-height: 1.6;
+            font-size: 1.05rem;
+            margin-bottom: 1.8rem;
+            line-height: 1.8;
             flex: 1;
         }
 
         .card-body p {
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
             color: var(--text-dark);
+            line-height: 1.6;
         }
 
         .card-body strong {
             color: var(--navy);
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             letter-spacing: 0.05em;
         }
 
@@ -308,8 +328,8 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
         .btn {
             border-radius: 4px;
             font-weight: 700;
-            font-size: 0.8rem;
-            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            padding: 0.65rem 1.5rem;
             transition: all 0.2s ease;
             border: none;
             letter-spacing: 0.05em;
@@ -317,8 +337,8 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
         }
 
         .btn-sm {
-            padding: 0.4rem 1rem;
-            font-size: 0.75rem;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.8rem;
         }
 
         .btn-primary {
@@ -329,7 +349,8 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
 
         .btn-primary:hover {
             background: var(--dark-blue);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
             color: var(--white);
         }
 
@@ -343,13 +364,14 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
         .btn-outline-success:hover {
             background: var(--success);
             color: var(--white);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
         }
 
         /* Badge Styles */
         .badge {
-            padding: 0.4rem 0.8rem;
-            font-size: 0.7rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -380,9 +402,10 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
         .alert {
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 0;
-            padding: 1rem 1.5rem;
+            padding: 1.5rem 2rem;
             font-weight: 500;
             border-left: 4px solid var(--primary-blue);
+            font-size: 1rem;
         }
 
         .alert-info {
@@ -391,22 +414,42 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
             border-left-color: var(--primary-blue);
         }
 
+        /* Card actions */
+        .card-actions {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        /* Rejection note */
+        .rejection-note {
+            background: #FEE2E2;
+            border-left: 3px solid var(--danger);
+            padding: 1rem 1.2rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #991B1B;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
         /* Info Section */
         .info-section {
             background: var(--white);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 0;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             border: 1px solid var(--border-color);
             border-left: 4px solid var(--gold);
-            margin-top: 3rem;
+            position: sticky;
+            top: 2rem;
         }
 
         .info-section h3 {
             color: var(--navy);
             font-weight: 800;
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
             text-transform: uppercase;
         }
@@ -414,19 +457,21 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
         .info-section p {
             color: var(--text-light);
             font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 0.8rem;
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
         }
 
         .info-section ol {
             color: var(--text-dark);
             font-weight: 500;
             padding-left: 1.5rem;
+            font-size: 0.95rem;
         }
 
         .info-section ol li {
-            margin-bottom: 0.6rem;
+            margin-bottom: 1rem;
             padding-left: 0.5rem;
+            line-height: 1.7;
         }
 
         .info-section a {
@@ -446,7 +491,7 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
             background: var(--navy);
             color: var(--white);
             padding: 2rem 0;
-            margin-top: 3rem;
+            margin-top: 4rem;
             box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
             border-top: 3px solid var(--primary-blue);
         }
@@ -468,33 +513,39 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
             }
         }
 
-        /* Grid Responsive */
-        .items-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        /* Card actions */
-        .card-actions {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* Rejection note */
-        .rejection-note {
-            background: #FEE2E2;
-            border-left: 3px solid var(--danger);
-            padding: 0.8rem;
-            margin-top: 0.8rem;
-            font-size: 0.85rem;
-            color: #991B1B;
-            font-style: italic;
+        /* Status badges */
+        .badge.bg-primary {
+            background: var(--primary-blue) !important;
+            color: var(--white) !important;
         }
 
         /* Responsive */
+        @media (max-width: 1400px) {
+            .content-wrapper {
+                grid-template-columns: 1fr 400px;
+                gap: 2.5rem;
+            }
+            
+            .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-section {
+                position: static;
+                margin-top: 3rem;
+            }
+            
+            .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
             .page-header {
                 padding: 1.5rem;
@@ -510,14 +561,20 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
 
             .items-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 2rem;
             }
-        }
-
-        /* Status badges */
-        .badge.bg-primary {
-            background: var(--primary-blue) !important;
-            color: var(--white) !important;
+            
+            .card-body {
+                padding: 1.8rem;
+            }
+            
+            .info-section {
+                padding: 1.8rem;
+            }
+            
+            main {
+                padding: 1.5rem 1rem 3rem;
+            }
         }
     </style>
 </head>
@@ -545,7 +602,7 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
     </div>
 </nav>
 
-<main class="container">
+<main class="container-fluid">
     <!-- Page Header -->
     <div class="page-header">
         <h1><i class="bi bi-archive me-2"></i>Browse Found Items</h1>
@@ -553,56 +610,76 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
     </div>
 
     <?php if (count($foundItems) > 0): ?>
-        <div class="items-grid">
-            <?php foreach ($foundItems as $item): ?>
-                <div class="card">
-                    <?php if ($item['photo']): ?>
-                        <img src="<?= getImageUrl($item['photo'], 'found'); ?>"
-                             class="card-img-top" alt="<?= htmlspecialchars($item['item_name']); ?>">
-                    <?php else: ?>
-                        <div class="bg-secondary text-dark d-flex align-items-center justify-content-center">
-                            <div class="text-center">
-                                <i class="bi bi-image" style="font-size: 3rem; color: #9CA3AF;"></i>
-                                <p class="mb-0 mt-2" style="color: #6B7280; font-weight: 600;">No Image Available</p>
+        <div class="content-wrapper">
+            <div class="items-section">
+                <div class="items-grid">
+                    <?php foreach ($foundItems as $item): ?>
+                        <div class="card">
+                            <?php if ($item['photo']): ?>
+                                <img src="<?= getImageUrl($item['photo'], 'found'); ?>"
+                                     class="card-img-top" alt="<?= htmlspecialchars($item['item_name']); ?>">
+                            <?php else: ?>
+                                <div class="bg-secondary text-dark d-flex align-items-center justify-content-center">
+                                    <div class="text-center">
+                                        <i class="bi bi-image" style="font-size: 3.5rem; color: #9CA3AF;"></i>
+                                        <p class="mb-0 mt-2" style="color: #6B7280; font-weight: 600; font-size: 0.95rem;">No Image Available</p>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <h5 class="card-title"><?= htmlspecialchars($item['item_name']); ?></h5>
+                                <p class="card-text"><?= htmlspecialchars(substr($item['description'], 0, 120)) . '...'; ?></p>
+                                <p class="mb-1"><strong>Date Found:</strong> <?= formatDate($item['date_found']); ?></p>
+                                <p class="mb-2"><strong>Status:</strong> <?= getStatusBadge($item['status']); ?></p>
+                                
+                                <div class="card-actions">
+                                    <a href="view_found_item.php?id=<?= $item['id']; ?>" class="btn btn-primary btn-sm me-2 mb-2">
+                                        <i class="bi bi-eye me-1"></i>View Details
+                                    </a>
+
+                                    <?php
+                                    // Claim status display logic
+                                    if (in_array($item['id'], $claimsByUser)): ?>
+                                        <span class="badge bg-warning mb-2">
+                                            <i class="bi bi-clock-history me-1"></i>Pending Claim
+                                        </span>
+                                    <?php elseif (isset($rejectedClaims[$item['id']])): ?>
+                                        <span class="badge bg-danger mb-2">
+                                            <i class="bi bi-x-circle me-1"></i>Claim Rejected
+                                        </span>
+                                        <?php if (!empty($rejectedClaims[$item['id']])): ?>
+                                            <div class="rejection-note">
+                                                <i class="bi bi-info-circle me-1"></i>
+                                                <strong>Admin Note:</strong> <?= htmlspecialchars($rejectedClaims[$item['id']]); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php elseif ($item['user_id'] != $userId): ?>
+                                        <a href="view_found_item.php?id=<?= $item['id']; ?>" class="btn btn-outline-success btn-sm mb-2">
+                                            <i class="bi bi-hand-thumbs-up me-1"></i>Claim This Item
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
-                    <?php endif; ?>
-                    <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($item['item_name']); ?></h5>
-                        <p class="card-text"><?= htmlspecialchars(substr($item['description'], 0, 100)) . '...'; ?></p>
-                        <p class="mb-1"><strong>Date Found:</strong> <?= formatDate($item['date_found']); ?></p>
-                        <p class="mb-2"><strong>Status:</strong> <?= getStatusBadge($item['status']); ?></p>
-                        
-                        <div class="card-actions">
-                            <a href="view_found_item.php?id=<?= $item['id']; ?>" class="btn btn-primary btn-sm me-2 mb-2">
-                                <i class="bi bi-eye me-1"></i>View Details
-                            </a>
-
-                            <?php
-                            // Claim status display logic
-                            if (in_array($item['id'], $claimsByUser)): ?>
-                                <span class="badge bg-warning mb-2">
-                                    <i class="bi bi-clock-history me-1"></i>Pending Claim
-                                </span>
-                            <?php elseif (isset($rejectedClaims[$item['id']])): ?>
-                                <span class="badge bg-danger mb-2">
-                                    <i class="bi bi-x-circle me-1"></i>Claim Rejected
-                                </span>
-                                <?php if (!empty($rejectedClaims[$item['id']])): ?>
-                                    <div class="rejection-note">
-                                        <i class="bi bi-info-circle me-1"></i>
-                                        <strong>Admin Note:</strong> <?= htmlspecialchars($rejectedClaims[$item['id']]); ?>
-                                    </div>
-                                <?php endif; ?>
-                            <?php elseif ($item['user_id'] != $userId): ?>
-                                <a href="view_found_item.php?id=<?= $item['id']; ?>" class="btn btn-outline-success btn-sm mb-2">
-                                    <i class="bi bi-hand-thumbs-up me-1"></i>Claim This Item
-                                </a>
-                            <?php endif; ?>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-            <?php endforeach; ?>
+            </div>
+            
+            <!-- Info Section -->
+            <aside class="info-section">
+                <h3><i class="bi bi-question-circle me-2"></i>Is This Your Item?</h3>
+                <p>If you see an item that belongs to you, follow these steps to claim it:</p>
+                <ol>
+                    <li><strong>Report your lost item first</strong> - Make sure you have submitted a lost item report in the system</li>
+                    <li><strong>View the item details</strong> - Click "View Details" to verify it matches your lost item description</li>
+                    <li><strong>Admin verification</strong> - The admin will link the found item to your lost item report</li>
+                    <li><strong>Request a claim</strong> - Once linked, you can request a claim from your dashboard</li>
+                </ol>
+                <p style="margin-top: 1.5rem;">
+                    <i class="bi bi-exclamation-triangle me-2" style="color: var(--warning);"></i>
+                    Haven't reported your lost item yet? <a href="report_lost.php">Report it now</a> to start the claiming process.
+                </p>
+            </aside>
         </div>
     <?php else: ?>
         <div class="alert alert-info">
@@ -610,22 +687,6 @@ $rejectedClaims = $rejectedClaimStmt->fetchAll(PDO::FETCH_KEY_PAIR); // key: fou
             <strong>No found items currently available.</strong> Check back later or report a lost item.
         </div>
     <?php endif; ?>
-
-    <!-- Info Section -->
-    <section class="info-section">
-        <h3><i class="bi bi-question-circle me-2"></i>Is This Your Item?</h3>
-        <p>If you see an item that belongs to you, follow these steps to claim it:</p>
-        <ol>
-            <li><strong>Report your lost item first</strong> - Make sure you have submitted a lost item report in the system</li>
-            <li><strong>View the item details</strong> - Click "View Details" to verify it matches your lost item description</li>
-            <li><strong>Admin verification</strong> - The admin will link the found item to your lost item report</li>
-            <li><strong>Request a claim</strong> - Once linked, you can request a claim from your dashboard</li>
-        </ol>
-        <p style="margin-top: 1.5rem;">
-            <i class="bi bi-exclamation-triangle me-2" style="color: var(--warning);"></i>
-            Haven't reported your lost item yet? <a href="report_lost.php">Report it now</a> to start the claiming process.
-        </p>
-    </section>
 </main>
 
 <footer class="text-center">
