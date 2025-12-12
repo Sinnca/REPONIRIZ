@@ -63,6 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             --dark-blue: #003D99;
             --light-blue: #F0F7FF;
             --accent-blue: #3385FF;
+            --purple: #7C3AED;
+            --light-purple: #EDE9FE;
+            --cyan: #06B6D4;
+            --light-cyan: #CFFAFE;
             --text-dark: #1a1a2e;
             --text-light: #6B7280;
             --white: #FFFFFF;
@@ -79,12 +83,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #F0F7FF 0%, #FFFFFF 50%, #E6F0FF 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             color: var(--text-dark);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        main, header, footer {
+            position: relative;
+            z-index: 1;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -94,26 +119,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         /* HEADER */
         header {
-            background: var(--white);
-            box-shadow: 0 2px 24px rgba(0, 102, 255, 0.08);
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem 0;
+            border-bottom: 3px solid var(--purple);
             animation: slideDown 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         header h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            background: linear-gradient(135deg, var(--purple) 0%, var(--primary-blue) 50%, var(--cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 0.5rem;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
+        }
+
+        header h1 i {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--primary-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-light);
             font-weight: 500;
             margin: 0;
@@ -122,23 +154,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         /* MAIN CONTAINER */
         main {
             flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
             animation: fadeIn 1s ease-out;
         }
 
         /* LOGIN SECTION */
         .login-container {
-            max-width: 1400px;
-            margin: 3rem auto;
-            padding: 0 1rem;
+            max-width: 550px;
+            width: 100%;
         }
 
         .login-card {
-            background: var(--white);
-            border-radius: 24px;
-            box-shadow: 0 8px 40px rgba(0, 102, 255, 0.12);
-            padding: 3.5rem;
-            margin-bottom: 3rem;
-            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            padding: 4rem 3.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.5);
             animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
@@ -150,35 +185,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            height: 6px;
+            background: linear-gradient(90deg, var(--purple) 0%, var(--primary-blue) 50%, var(--cyan) 100%);
         }
 
         .login-card h2 {
-            color: var(--primary-blue);
-            font-weight: 800;
-            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--primary-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            font-size: 2.5rem;
             text-align: center;
-            margin-bottom: 2.5rem;
-            letter-spacing: -0.5px;
+            margin-bottom: 3rem;
+            letter-spacing: -1px;
         }
 
         .login-card h2 i {
-            margin-right: 0.5rem;
-            font-size: 2rem;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--primary-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.2rem;
         }
 
         /* FORM ELEMENTS */
         .form-group-custom {
-            margin-bottom: 1.8rem;
+            margin-bottom: 2rem;
         }
 
         .form-label {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.8rem;
             font-size: 0.95rem;
-            display: block;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-label i {
+            margin-right: 0.5rem;
+            color: var(--purple);
         }
 
         .input-wrapper {
@@ -187,27 +233,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         .input-icon {
             position: absolute;
-            left: 1.2rem;
+            left: 1.3rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--primary-blue);
-            font-size: 1.1rem;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--primary-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.2rem;
             z-index: 2;
         }
 
         .form-control {
             border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 0.95rem 1.2rem 0.95rem 3.2rem;
-            font-size: 0.95rem;
+            border-radius: 16px;
+            padding: 1.1rem 1.3rem 1.1rem 3.5rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
             background: var(--white);
             font-weight: 500;
         }
 
         .form-control:focus {
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.1);
+            border-color: var(--purple);
+            box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.1);
             outline: none;
         }
 
@@ -217,157 +266,90 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         /* BUTTON */
         .btn-login {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            background: linear-gradient(135deg, var(--purple) 0%, var(--primary-blue) 50%, var(--cyan) 100%);
             border: none;
-            border-radius: 12px;
-            padding: 1rem 3rem;
-            font-weight: 700;
-            font-size: 1.05rem;
+            border-radius: 16px;
+            padding: 1.2rem 3rem;
+            font-weight: 800;
+            font-size: 1.1rem;
             color: var(--white);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 16px rgba(0, 102, 255, 0.3);
-            letter-spacing: 0.3px;
-            min-width: 200px;
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+            letter-spacing: 0.5px;
+            width: 100%;
+            text-transform: uppercase;
+            margin-top: 1rem;
         }
 
         .btn-login:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0, 102, 255, 0.4);
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(124, 58, 237, 0.5);
         }
 
         .btn-login:active {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
 
         /* ALERT */
         .alert {
             border: none;
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
             animation: slideInAlert 0.5s ease-out;
         }
 
         .alert-danger {
             background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
             color: #991B1B;
-            border-left: 4px solid var(--error);
+            border-left: 5px solid var(--error);
         }
 
         .alert-success {
             background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
             color: #065F46;
-            border-left: 4px solid var(--success);
+            border-left: 5px solid var(--success);
         }
 
-        /* INFO CARDS SECTION */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s backwards;
+        /* FOOTER */
+        footer {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            color: var(--text-dark);
+            padding: 2rem 0;
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: auto;
+            border-top: 3px solid var(--purple);
         }
 
-        .info-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 24px rgba(0, 102, 255, 0.08);
-            border: 1px solid var(--border-color);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+        footer p {
+            margin: 0;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-light);
         }
 
-        .info-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .info-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .info-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0, 102, 255, 0.16);
-            border-color: var(--primary-blue);
-        }
-
-        .info-card h3 {
-            color: var(--primary-blue);
-            font-weight: 800;
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            letter-spacing: -0.5px;
-        }
-
-        .info-card h3 i {
-            font-size: 2rem;
-            margin-right: 0.8rem;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+        footer i {
+            margin-right: 0.5rem;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--primary-blue) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .info-card ul, .info-card ol {
-            padding-left: 1.5rem;
-            margin: 0;
-        }
-
-        .info-card li {
-            margin-bottom: 0.8rem;
-            color: var(--text-light);
-            font-weight: 500;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .info-card li::marker {
-            color: var(--primary-blue);
-            font-weight: 700;
-        }
-
-        /* FOOTER */
-        footer {
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
-            color: var(--white);
-            padding: 2rem 0;
-            box-shadow: 0 -2px 24px rgba(0, 102, 255, 0.12);
-            animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-top: auto;
-        }
-
-        footer p {
-            margin: 0;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        footer i {
-            margin-right: 0.5rem;
-        }
-
         /* HELPER TEXT */
         .helper-text {
             text-align: center;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
             color: var(--text-light);
             font-size: 0.9rem;
             font-weight: 500;
+        }
+
+        .helper-text i {
+            color: var(--purple);
         }
 
         /* ANIMATIONS */
@@ -379,7 +361,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -423,48 +405,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         /* RESPONSIVE */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             header p {
-                font-size: 0.95rem;
+                font-size: 1rem;
             }
 
             .login-card {
-                padding: 2rem;
+                padding: 3rem 2rem;
             }
 
             .login-card h2 {
-                font-size: 1.8rem;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .info-card {
-                padding: 2rem;
-            }
-
-            .btn-login {
-                width: 100%;
-                min-width: auto;
+                font-size: 2rem;
             }
         }
 
         @media (max-width: 576px) {
-            .login-container {
-                margin: 1.5rem auto;
+            main {
+                padding: 2rem 1rem;
             }
 
             .login-card {
-                padding: 1.5rem;
-                margin-bottom: 2rem;
+                padding: 2.5rem 1.5rem;
+                border-radius: 24px;
             }
 
             .form-control {
-                padding: 0.85rem 1rem 0.85rem 3rem;
+                padding: 1rem 1rem 1rem 3.2rem;
+            }
+
+            .btn-login {
+                padding: 1rem 2rem;
             }
         }
 
@@ -477,12 +449,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .btn-login.loading::after {
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             top: 50%;
             left: 50%;
-            margin-left: -10px;
-            margin-top: -10px;
+            margin-left: -12px;
+            margin-top: -12px;
             border: 3px solid var(--white);
             border-radius: 50%;
             border-top-color: transparent;
@@ -497,13 +469,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .login-card::after {
             content: '';
             position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0, 102, 255, 0.05) 0%, transparent 70%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
             border-radius: 50%;
-            top: -150px;
-            right: -150px;
+            top: -200px;
+            right: -200px;
             pointer-events: none;
+        }
+
+        /* Floating animation for decorative element */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
     </style>
 
@@ -514,7 +492,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!-- HEADER -->
 <header class="text-center">
-    <div class="container">
+    <div class="container" >
         <h1><i class="bi bi-box-seam"></i> Campus Lost & Found System</h1>
         <p>Welcome! Please login with your institutional account</p>
     </div>
@@ -535,50 +513,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <form method="POST" action="" id="loginForm">
-                <div class="row justify-content-center">
-                    <div class="col-lg-5 col-md-6">
-                        <div class="form-group-custom">
-                            <label for="email" class="form-label">
-                                <i class="bi bi-envelope me-1"></i>Email Address
-                            </label>
-                            <div class="input-wrapper">
-                                <i class="bi bi-envelope-fill input-icon"></i>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    class="form-control"
-                                    placeholder="your.email@institution.edu"
-                                    required
-                                >
-                            </div>
-                        </div>
+                <div class="form-group-custom">
+                    <label for="email" class="form-label">
+                        <i class="bi bi-envelope"></i>Email Address
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="bi bi-envelope-fill input-icon"></i>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="your.email@institution.edu"
+                            required
+                        >
                     </div>
-                    <div class="col-lg-5 col-md-6">
-                        <div class="form-group-custom">
-                            <label for="password" class="form-label">
-                                <i class="bi bi-lock me-1"></i>Password
-                            </label>
-                            <div class="input-wrapper">
-                                <i class="bi bi-lock-fill input-icon"></i>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    class="form-control"
-                                    placeholder="Enter your password"
-                                    required
-                                >
-                            </div>
-                        </div>
+                </div>
+                
+                <div class="form-group-custom">
+                    <label for="password" class="form-label">
+                        <i class="bi bi-lock"></i>Password
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="bi bi-lock-fill input-icon"></i>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Enter your password"
+                            required
+                        >
                     </div>
                 </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn-login">
-                        <i class="bi bi-box-arrow-in-right me-2"></i>Login to Dashboard
-                    </button>
-                </div>
+                <button type="submit" class="btn-login">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Login to Dashboard
+                </button>
             </form>
 
             <!-- JS Script -->
@@ -619,61 +590,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </script>
 
             <p class="helper-text">
-                <i class="bi bi-info-circle me-1"></i>
+                <i class="bi bi-info-circle me-2"></i>
                 Use your institutional email and password to access the system
             </p>
-        </div>
-
-        <!-- INFO CARDS GRID -->
-        <div class="info-grid">
-            <!-- Students Card -->
-            <div class="info-card">
-                <h3><i class="bi bi-person-circle"></i>For Students</h3>
-                <ul>
-                    <li>Report lost items quickly</li>
-                    <li>Browse found items database</li>
-                    <li>Submit items you've found</li>
-                    <li>Request claims for your items</li>
-                    <li>Track all your submissions</li>
-                </ul>
-            </div>
-
-            <!-- Admin Card -->
-            <div class="info-card">
-                <h3><i class="bi bi-shield-check"></i>For Administrators</h3>
-                <ul>
-                    <li>Verify submitted items</li>
-                    <li>Approve claim requests</li>
-                    <li>Schedule item pickups</li>
-                    <li>Manage system data</li>
-                    <li>View comprehensive statistics</li>
-                </ul>
-            </div>
-
-            <!-- Lost Something -->
-            <div class="info-card">
-                <h3><i class="bi bi-search"></i>Lost Something?</h3>
-                <ol>
-                    <li>Login to your account</li>
-                    <li>Report the lost item</li>
-                    <li>Wait for admin verification</li>
-                    <li>Check for potential matches</li>
-                    <li>Submit a claim request</li>
-                    <li>Schedule and pick up your item</li>
-                </ol>
-            </div>
-
-            <!-- Found Something -->
-            <div class="info-card">
-                <h3><i class="bi bi-hand-thumbs-up"></i>Found Something?</h3>
-                <ol>
-                    <li>Login to your account</li>
-                    <li>Submit the found item</li>
-                    <li>Admin verifies the item</li>
-                    <li>Owner gets notified</li>
-                    <li>Help reunite items with owners!</li>
-                </ol>
-            </div>
         </div>
     </div>
 </main>
