@@ -6,6 +6,7 @@
     --text-primary: #1f2937;
     --text-secondary: #6b7280;
     --border-color: #e5e7eb;
+    --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 body {
@@ -15,9 +16,13 @@ body {
 }
 
 .content-wrapper {
-    padding: 40px 50px;
+    padding: 32px 40px;
     max-width: 1600px;
     margin: 0 auto;
+    background: var(--bg-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text-primary);
+    min-height: 100vh;
 }
 
 h2 {
@@ -30,22 +35,56 @@ h2 {
 
 .page-header {
     margin-bottom: 32px;
-    padding: 24px 28px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    border-left: 4px solid var(--primary-blue);
+    padding: 28px 32px;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #0052d4 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 61, 165, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 200px;
+    height: 200px;
+    background: rgba(247, 197, 6, 0.15);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.page-header h2 {
+    color: white;
+    position: relative;
+    z-index: 1;
 }
 
 .count-badge {
     display: inline-block;
-    background: var(--primary-blue);
-    color: white;
-    padding: 6px 14px;
+    background: var(--primary-yellow);
+    color: #1f2937;
+    padding: 8px 18px;
     border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.875rem;
+    font-weight: 700;
+    font-size: 0.9375rem;
     margin-left: 12px;
+    box-shadow: 0 2px 8px rgba(247, 197, 6, 0.4);
+    position: relative;
+    z-index: 1;
 }
 
 .card {
@@ -228,5 +267,9 @@ footer {
         margin-left: 0;
         margin-top: 8px;
         width: fit-content;
+    }
+    
+    .page-header {
+        padding: 24px;
     }
 }

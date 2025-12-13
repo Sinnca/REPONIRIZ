@@ -29,7 +29,7 @@ $pendingItems = $stmt->fetchAll();
     <link rel="stylesheet" href="../assets/css/admin_pendinglost.css">
 
 </head>
-<body class="bg-light">
+<body>
 
 <?php include '../components/sidebar.php'; ?>
 

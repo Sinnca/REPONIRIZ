@@ -30,7 +30,7 @@ $pendingItems = $stmt->fetchAll();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/admin_pendingfound.css">
 </head>
-<body class="bg-light">
+<body>
 
 <?php include '../components/sidebar.php'; ?>
 

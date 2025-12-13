@@ -24,19 +24,39 @@
 
 /* Dashboard Header */
 .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 32px;
-    padding: 24px 28px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: var(--card-shadow);
-    border-left: 4px solid var(--primary-blue);
+    padding: 28px 32px;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #0052d4 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 61, 165, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+.dashboard-header::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.dashboard-header::after{
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 200px;
+    height: 200px;
+    background: rgba(247, 197, 6, 0.15);
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 .header-left h1 {
-    color: var(--primary-blue);
+    color: white;
     font-weight: 700;
     font-size: 2rem;
     margin: 0 0 4px 0;
@@ -44,7 +64,7 @@
 }
 
 .header-subtitle {
-    color: var(--text-secondary);
+    color: white;
     font-size: 0.9375rem;
     margin: 0;
 }
