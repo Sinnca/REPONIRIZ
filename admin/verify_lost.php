@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="../assets/js/main.js" defer></script>
 </head>
-<body>
+<body class="bg-light">
 
 <?php include '../components/sidebar.php'; ?>
 

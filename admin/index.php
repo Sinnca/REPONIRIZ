@@ -111,15 +111,36 @@ function getColoredStatusBadge($status) {
 
 <main class="content-wrapper">
 
-    <h1 class="mb-4">Admin Dashboard</h1>
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="header-left">
+            <h1>Admin Dashboard</h1>
+            <p class="header-subtitle">Welcome back, <?php echo htmlspecialchars($userName); ?></p>
+        </div>
+    </div>
 
     <!-- Statistics Overview -->
-    <section class="mb-5">
-        <h2 class="section-title">System Statistics</h2>
-        <div class="row">
-            <?php foreach ($stats as $label => $value): ?>
-                <div class="col-md-3 col-sm-6">
-                    <div class="stats-card">
+    <section class="stats-section">
+        <h2 class="section-title">System Overview</h2>
+        <div class="stats-grid">
+            <?php 
+            $statIcons = [
+                'total_lost' => 'search',
+                'total_found' => 'bag-check',
+                'pending_lost' => 'hourglass-split',
+                'pending_found' => 'hourglass',
+                'pending_claims' => 'journal-text',
+                'ready_for_claim' => 'check-circle',
+                'returned_items' => 'box-arrow-in-down',
+                'total_users' => 'people'
+            ];
+            foreach ($stats as $label => $value): 
+            ?>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="bi bi-<?php echo $statIcons[$label] ?? 'graph-up'; ?>"></i>
+                    </div>
+                    <div class="stat-content">
                         <h3><?php echo $value; ?></h3>
                         <p><?php echo ucwords(str_replace('_', ' ', $label)); ?></p>
                     </div>
@@ -128,193 +149,249 @@ function getColoredStatusBadge($status) {
         </div>
     </section>
 
-    <!-- Pending Actions -->
-    <section class="mb-5">
-        <h2 class="section-title">Actions Required</h2>
+    <!-- Two Column Layout -->
+    <div class="row g-4">
+        
+        <!-- Left Column - Pending Items -->
+        <div class="col-lg-8">
+            
+            <section class="content-section">
+                <h2 class="section-title">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    Actions Required
+                </h2>
 
-        <!-- Pending Lost Items -->
-        <div class="card mb-4">
-            <div class="card-header">
-                Pending Lost Items (<?php echo $stats['pending_lost']; ?>)
-            </div>
-            <div class="card-body">
-                <?php if ($pendingLostItems): ?>
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead>
-                            <tr>
-                                <th>Item Name</th>
-                                <th>Submitted By</th>
-                                <th>Date Lost</th>
-                                <th>Date Submitted</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach ($pendingLostItems as $item): ?>
-                                <tr>
-                                    <td><?php echo htmlspecialchars($item['item_name']); ?></td>
-                                    <td><?php echo htmlspecialchars($item['submitter_name']); ?></td>
-                                    <td><?php echo formatDate($item['date_lost']); ?></td>
-                                    <td><?php echo formatDate($item['created_at']); ?></td>
-                                    <td class="table-actions">
-                                        <a class="btn btn-sm btn-success" href="verify_lost.php?id=<?php echo $item['id']; ?>">Verify</a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                <!-- Pending Lost Items -->
+                <div class="card action-card">
+                    <div class="card-header">
+                        <div class="card-header-content">
+                            <h3><i class="bi bi-search"></i> Pending Lost Items</h3>
+                            <span class="count-badge"><?php echo $stats['pending_lost']; ?></span>
+                        </div>
                     </div>
-                    <div class="mt-3">
-                        <a href="pending_lost.php" class="btn btn-primary btn-sm">View All</a>
+                    <div class="card-body">
+                        <?php if ($pendingLostItems): ?>
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Submitted By</th>
+                                        <th>Date Lost</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($pendingLostItems as $item): ?>
+                                        <tr>
+                                            <td><strong><?php echo htmlspecialchars($item['item_name']); ?></strong></td>
+                                            <td><?php echo htmlspecialchars($item['submitter_name']); ?></td>
+                                            <td><?php echo formatDate($item['date_lost']); ?></td>
+                                            <td class="table-actions">
+                                                <a class="btn btn-sm btn-success" href="verify_lost.php?id=<?php echo $item['id']; ?>">
+                                                    <i class="bi bi-check-circle"></i> Verify
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer">
+                                <a href="pending_lost.php" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-arrow-right"></i> View All Lost Items
+                                </a>
+                            </div>
+                        <?php else: ?>
+                            <div class="empty-state">
+                                <i class="bi bi-check-circle"></i>
+                                <p>No pending lost items</p>
+                            </div>
+                        <?php endif; ?>
                     </div>
-                <?php else: ?>
-                    <p class="text-muted mb-0">No pending lost items.</p>
-                <?php endif; ?>
-            </div>
+                </div>
+
+                <!-- Pending Found Items -->
+                <div class="card action-card">
+                    <div class="card-header">
+                        <div class="card-header-content">
+                            <h3><i class="bi bi-bag-check"></i> Pending Found Items</h3>
+                            <span class="count-badge"><?php echo $stats['pending_found']; ?></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <?php if ($pendingFoundItems): ?>
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Found By</th>
+                                        <th>Date Found</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($pendingFoundItems as $item): ?>
+                                        <tr>
+                                            <td><strong><?php echo htmlspecialchars($item['item_name']); ?></strong></td>
+                                            <td><?php echo htmlspecialchars($item['finder_name']); ?></td>
+                                            <td><?php echo formatDate($item['date_found']); ?></td>
+                                            <td class="table-actions">
+                                                <a class="btn btn-sm btn-success" href="verify_found.php?id=<?php echo $item['id']; ?>">
+                                                    <i class="bi bi-check-circle"></i> Verify
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer">
+                                <a href="pending_found.php" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-arrow-right"></i> View All Found Items
+                                </a>
+                            </div>
+                        <?php else: ?>
+                            <div class="empty-state">
+                                <i class="bi bi-check-circle"></i>
+                                <p>No pending found items</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <!-- Pending Claim Requests -->
+                <div class="card action-card">
+                    <div class="card-header">
+                        <div class="card-header-content">
+                            <h3><i class="bi bi-journal-text"></i> Pending Claim Requests</h3>
+                            <span class="count-badge"><?php echo $stats['pending_claims']; ?></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <?php if ($pendingClaims): ?>
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Requested By</th>
+                                        <th>Request Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($pendingClaims as $claim): ?>
+                                        <tr>
+                                            <td><strong><?php echo htmlspecialchars($claim['item_name']); ?></strong></td>
+                                            <td><?php echo htmlspecialchars($claim['requester_name']); ?></td>
+                                            <td><?php echo formatDate($claim['created_at']); ?></td>
+                                            <td class="table-actions">
+                                                <a class="btn btn-sm btn-warning" href="review_claim.php?id=<?php echo $claim['id']; ?>">
+                                                    <i class="bi bi-clipboard-check"></i> Review
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer">
+                                <a href="claim_requests.php" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-arrow-right"></i> View All Claims
+                                </a>
+                            </div>
+                        <?php else: ?>
+                            <div class="empty-state">
+                                <i class="bi bi-check-circle"></i>
+                                <p>No pending claim requests</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <!-- Pending Found Items -->
-        <div class="card mb-4">
-            <div class="card-header">
-                Pending Found Items (<?php echo $stats['pending_found']; ?>)
-            </div>
-            <div class="card-body">
-                <?php if ($pendingFoundItems): ?>
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead>
-                            <tr>
-                                <th>Item Name</th>
-                                <th>Found By</th>
-                                <th>Date Found</th>
-                                <th>Date Submitted</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach ($pendingFoundItems as $item): ?>
-                                <tr>
-                                    <td><?php echo htmlspecialchars($item['item_name']); ?></td>
-                                    <td><?php echo htmlspecialchars($item['finder_name']); ?></td>
-                                    <td><?php echo formatDate($item['date_found']); ?></td>
-                                    <td><?php echo formatDate($item['created_at']); ?></td>
-                                    <td class="table-actions">
-                                        <a class="btn btn-sm btn-success" href="verify_found.php?id=<?php echo $item['id']; ?>">Verify</a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                            </tbody>
-                        </table>
+        <!-- Right Column - Activities & Quick Actions -->
+        <div class="col-lg-4">
+            
+            <!-- Recent Activities -->
+            <section class="content-section">
+                <h2 class="section-title">
+                    <i class="bi bi-clock-history"></i>
+                    Recent Activities
+                </h2>
+                <div class="card activity-card">
+                    <div class="card-body">
+                        <?php if ($recentActivities): ?>
+                            <div class="activity-list">
+                                <?php foreach ($recentActivities as $activity): ?>
+                                    <div class="activity-item">
+                                        <div class="activity-icon <?php echo $activity['type']; ?>">
+                                            <i class="bi bi-<?php echo $activity['type'] === 'lost' ? 'search' : 'bag-check'; ?>"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p class="activity-title"><?php echo htmlspecialchars($activity['name']); ?></p>
+                                            <div class="activity-meta">
+                                                <span class="activity-type"><?php echo strtoupper($activity['type']); ?></span>
+                                                <span class="activity-status"><?php echo getColoredStatusBadge($activity['status']); ?></span>
+                                            </div>
+                                            <p class="activity-date">
+                                                <i class="bi bi-clock"></i>
+                                                <?php echo formatDateTime($activity['created_at']); ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else: ?>
+                            <div class="empty-state">
+                                <i class="bi bi-inbox"></i>
+                                <p>No recent activities</p>
+                            </div>
+                        <?php endif; ?>
                     </div>
-                    <div class="mt-3">
-                        <a href="pending_found.php" class="btn btn-primary btn-sm">View All</a>
-                    </div>
-                <?php else: ?>
-                    <p class="text-muted mb-0">No pending found items.</p>
-                <?php endif; ?>
-            </div>
-        </div>
+                </div>
+            </section>
 
-        <!-- Pending Claim Requests -->
-        <div class="card mb-4">
-            <div class="card-header">
-                Pending Claim Requests (<?php echo $stats['pending_claims']; ?>)
-            </div>
-            <div class="card-body">
-                <?php if ($pendingClaims): ?>
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead>
-                            <tr>
-                                <th>Item Name</th>
-                                <th>Requested By</th>
-                                <th>Request Date</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach ($pendingClaims as $claim): ?>
-                                <tr>
-                                    <td><?php echo htmlspecialchars($claim['item_name']); ?></td>
-                                    <td><?php echo htmlspecialchars($claim['requester_name']); ?></td>
-                                    <td><?php echo formatDate($claim['created_at']); ?></td>
-                                    <td class="table-actions">
-                                        <a class="btn btn-sm btn-warning" href="review_claim.php?id=<?php echo $claim['id']; ?>">Review</a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="mt-3">
-                        <a href="claim_requests.php" class="btn btn-primary btn-sm">View All</a>
-                    </div>
-                <?php else: ?>
-                    <p class="text-muted mb-0">No pending claim requests.</p>
-                <?php endif; ?>
-            </div>
+            <!-- Quick Actions -->
+            <section class="content-section">
+                <h2 class="section-title">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                    Quick Actions
+                </h2>
+                <div class="quick-actions-grid">
+                    <a class="quick-action-btn" href="pending_lost.php">
+                        <i class="bi bi-search"></i>
+                        <span>Review Lost Items</span>
+                    </a>
+                    <a class="quick-action-btn" href="pending_found.php">
+                        <i class="bi bi-bag-check"></i>
+                        <span>Review Found Items</span>
+                    </a>
+                    <a class="quick-action-btn" href="claim_requests.php">
+                        <i class="bi bi-journal-text"></i>
+                        <span>Review Claims</span>
+                    </a>
+                    <a class="quick-action-btn" href="all_items.php">
+                        <i class="bi bi-collection"></i>
+                        <span>All Items</span>
+                    </a>
+                    <a class="quick-action-btn" href="statistics.php">
+                        <i class="bi bi-graph-up"></i>
+                        <span>Statistics</span>
+                    </a>
+                </div>
+            </section>
         </div>
-    </section>
-
-    <!-- Recent Activities -->
-    <section class="mb-5">
-        <h2 class="section-title">Recent System Activities</h2>
-        <div class="card">
-            <div class="card-body">
-                <?php if ($recentActivities): ?>
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead>
-                            <tr>
-                                <th>Type</th>
-                                <th>Item Name</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach ($recentActivities as $activity): ?>
-                                <tr>
-                                    <td><?php echo strtoupper($activity['type']); ?></td>
-                                    <td><?php echo htmlspecialchars($activity['name']); ?></td>
-                                    <td><?php echo getColoredStatusBadge($activity['status']); ?></td>
-                                    <td><?php echo formatDateTime($activity['created_at']); ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php else: ?>
-                    <p class="text-muted mb-0">No recent activities.</p>
-                <?php endif; ?>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quick Links -->
-    <section>
-        <h2 class="section-title">Quick Actions</h2>
-        <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-outline-primary" href="pending_lost.php">
-                <i class="bi bi-search me-1"></i> Review Pending Lost Items
-            </a>
-            <a class="btn btn-outline-primary" href="pending_found.php">
-                <i class="bi bi-bag-check me-1"></i> Review Pending Found Items
-            </a>
-            <a class="btn btn-outline-primary" href="claim_requests.php">
-                <i class="bi bi-journal-text me-1"></i> Review Claim Requests
-            </a>
-            <a class="btn btn-outline-primary" href="all_items.php">
-                <i class="bi bi-collection me-1"></i> View All Items
-            </a>
-            <a class="btn btn-outline-primary" href="statistics.php">
-                <i class="bi bi-graph-up me-1"></i> View Statistics
-            </a>
-        </div>
-    </section>
+    </div>
 
 </main>
+
+<footer>
+    &copy; 2024 Campus Lost & Found System - Admin Panel
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
