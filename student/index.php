@@ -68,17 +68,18 @@ $notifications = $stmtNotifications->fetchAll();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
         :root {
-            --primary-blue: #0066FF;
-            --secondary-blue: #E6F0FF;
-            --dark-blue: #003D99;
-            --light-blue: #F0F7FF;
-            --accent-blue: #3385FF;
+            --university-blue: #003366;
+            --university-gold: #FFB81C;
+            --navy: #002D72;
+            --burgundy: #8B1538;
+            --forest-green: #1B5E20;
+            --slate: #455A64;
+            --light-blue: #E3F2FD;
+            --light-gold: #FFF8E1;
             --text-dark: #1a1a2e;
             --text-light: #6B7280;
             --white: #FFFFFF;
             --border-color: #E5E7EB;
-            --gold: #FDB813;
-            --navy: #002D72;
         }
 
         * {
@@ -130,17 +131,17 @@ $notifications = $stmtNotifications->fetchAll();
 
         /* Navbar Styles */
         .navbar {
-            background: var(--white);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            padding: 0.8rem 0;
-            border-bottom: 3px solid var(--primary-blue);
+            background: linear-gradient(135deg, var(--university-blue) 0%, var(--navy) 100%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            padding: 1rem 0;
+            border-bottom: 4px solid var(--university-gold);
         }
 
         .navbar-brand {
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 800;
-            font-size: 1.5rem;
-            color: var(--navy) !important;
+            font-size: 1.6rem;
+            color: var(--white) !important;
             letter-spacing: -0.02em;
             display: flex;
             align-items: center;
@@ -148,13 +149,13 @@ $notifications = $stmtNotifications->fetchAll();
         }
 
         .navbar-brand i {
-            color: var(--primary-blue);
-            margin-right: 0.5rem;
-            font-size: 1.8rem;
+            color: var(--university-gold);
+            margin-right: 0.6rem;
+            font-size: 2rem;
         }
 
         .navbar-nav .nav-link {
-            color: var(--text-dark) !important;
+            color: var(--white) !important;
             font-weight: 600;
             font-size: 0.85rem;
             margin: 0 0.2rem;
@@ -166,24 +167,24 @@ $notifications = $stmtNotifications->fetchAll();
         }
 
         .navbar-nav .nav-link:hover {
-            background: var(--light-blue);
-            color: var(--primary-blue) !important;
+            background: rgba(255, 184, 28, 0.2);
+            color: var(--university-gold) !important;
         }
 
         .navbar-nav .nav-link.active {
-            background: var(--primary-blue);
-            color: var(--white) !important;
+            background: var(--university-gold);
+            color: var(--university-blue) !important;
             font-weight: 700;
         }
 
         .navbar-text {
-            color: var(--text-dark) !important;
+            color: var(--white) !important;
             font-weight: 500;
             font-size: 0.9rem;
         }
 
         .navbar-text strong {
-            color: var(--primary-blue);
+            color: var(--university-gold);
             font-weight: 700;
         }
 
@@ -196,7 +197,7 @@ $notifications = $stmtNotifications->fetchAll();
             margin-bottom: 24px;
             overflow: hidden;
             transition: all 0.2s ease;
-            border-top: 4px solid var(--primary-blue);
+            border-top: 5px solid var(--university-blue);
         }
 
         .card:hover {
@@ -206,7 +207,7 @@ $notifications = $stmtNotifications->fetchAll();
 
         .card-header {
             background: var(--white);
-            color: var(--navy);
+            color: var(--university-blue);
             border-bottom: 2px solid var(--border-color);
             font-weight: 800;
             font-size: 1rem;
@@ -217,7 +218,7 @@ $notifications = $stmtNotifications->fetchAll();
         }
 
         .card-header i {
-            color: var(--primary-blue);
+            color: var(--university-gold);
             margin-right: 0.5rem;
         }
 
@@ -229,7 +230,7 @@ $notifications = $stmtNotifications->fetchAll();
         .stat-card {
             background: var(--white);
             border: 2px solid var(--border-color);
-            border-left: 6px solid var(--primary-blue);
+            border-left: 6px solid var(--university-blue);
             border-radius: 0;
             padding: 2rem;
             text-align: center;
@@ -243,14 +244,30 @@ $notifications = $stmtNotifications->fetchAll();
 
         .stat-card:hover {
             transform: translateY(-4px);
-            border-left-color: var(--gold);
+            border-left-color: var(--university-gold);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-card:nth-child(2) {
+            border-left-color: var(--forest-green);
+        }
+
+        .stat-card:nth-child(2):hover {
+            border-left-color: var(--university-gold);
+        }
+
+        .stat-card:nth-child(3) {
+            border-left-color: var(--burgundy);
+        }
+
+        .stat-card:nth-child(3):hover {
+            border-left-color: var(--university-gold);
         }
 
         .stat-card h3 {
             font-size: 3rem;
             font-weight: 900;
-            color: var(--navy);
+            color: var(--university-blue);
             margin-bottom: 0.5rem;
             font-family: 'Space Grotesk', sans-serif;
         }
@@ -265,7 +282,23 @@ $notifications = $stmtNotifications->fetchAll();
         }
 
         .stat-card p i {
-            color: var(--primary-blue);
+            color: var(--university-blue);
+        }
+
+        .stat-card:nth-child(2) h3 {
+            color: var(--forest-green);
+        }
+
+        .stat-card:nth-child(2) p i {
+            color: var(--forest-green);
+        }
+
+        .stat-card:nth-child(3) h3 {
+            color: var(--burgundy);
+        }
+
+        .stat-card:nth-child(3) p i {
+            color: var(--burgundy);
         }
 
         /* Table Styles */
@@ -276,7 +309,7 @@ $notifications = $stmtNotifications->fetchAll();
         }
 
         .table thead th {
-            background: var(--navy);
+            background: var(--university-blue);
             color: var(--white);
             border: none;
             font-weight: 700;
@@ -292,7 +325,7 @@ $notifications = $stmtNotifications->fetchAll();
         }
 
         .table tbody tr:hover {
-            background: #FAFAFA;
+            background: var(--light-gold);
         }
 
         .table tbody td {
@@ -314,67 +347,70 @@ $notifications = $stmtNotifications->fetchAll();
         }
 
         .btn-primary {
-            background: var(--primary-blue);
-            box-shadow: 0 2px 4px rgba(0, 102, 255, 0.3);
+            background: var(--university-blue);
+            box-shadow: 0 2px 4px rgba(0, 51, 102, 0.3);
         }
 
         .btn-primary:hover {
-            background: var(--dark-blue);
+            background: var(--navy);
             transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0, 102, 255, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 51, 102, 0.4);
         }
 
         .btn-success {
-            background: #10B981;
-            box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+            background: var(--forest-green);
+            box-shadow: 0 2px 4px rgba(27, 94, 32, 0.3);
         }
 
         .btn-success:hover {
-            background: #059669;
+            background: #145A1C;
             transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 4px 8px rgba(27, 94, 32, 0.4);
         }
 
         .btn-secondary {
-            background: #6B7280;
-            box-shadow: 0 2px 4px rgba(107, 114, 128, 0.3);
+            background: var(--slate);
+            box-shadow: 0 2px 4px rgba(69, 90, 100, 0.3);
         }
 
         .btn-secondary:hover {
-            background: #4B5563;
+            background: #37474F;
             transform: translateY(-1px);
         }
 
         .btn-info {
-            background: #0EA5E9;
-            box-shadow: 0 2px 4px rgba(14, 165, 233, 0.3);
+            background: #0277BD;
+            box-shadow: 0 2px 4px rgba(2, 119, 189, 0.3);
         }
 
         .btn-info:hover {
-            background: #0284C7;
+            background: #01579B;
             transform: translateY(-1px);
         }
 
         .btn-warning {
-            background: #F59E0B;
-            box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+            background: var(--university-gold);
+            color: var(--university-blue);
+            box-shadow: 0 2px 4px rgba(255, 184, 28, 0.3);
         }
 
         .btn-warning:hover {
-            background: #D97706;
+            background: #F9A825;
+            color: var(--university-blue);
             transform: translateY(-1px);
         }
 
         .btn-outline-primary {
-            border: 2px solid var(--primary-blue);
-            color: var(--primary-blue);
+            border: 2px solid var(--university-gold);
+            color: var(--university-gold);
             background: transparent;
             font-weight: 700;
         }
 
         .btn-outline-primary:hover {
-            background: var(--primary-blue);
-            color: var(--white);
+            background: var(--university-gold);
+            color: var(--university-blue);
+            border-color: var(--university-gold);
             transform: translateY(-1px);
         }
 
@@ -446,7 +482,7 @@ $notifications = $stmtNotifications->fetchAll();
         .section-title {
             font-size: 1.8rem;
             font-weight: 800;
-            color: var(--navy);
+            color: var(--university-blue);
             margin-bottom: 1.5rem;
             text-align: center;
             font-family: 'Space Grotesk', sans-serif;
@@ -455,22 +491,22 @@ $notifications = $stmtNotifications->fetchAll();
         }
 
         .section-title i {
-            color: var(--primary-blue);
+            color: var(--university-gold);
         }
 
         /* Footer */
         footer {
-            background: var(--navy);
+            background: linear-gradient(135deg, var(--university-blue) 0%, var(--navy) 100%);
             color: var(--white);
             font-weight: 500;
             padding: 2rem 0;
             margin-top: 3rem;
-            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
-            border-top: 3px solid var(--primary-blue);
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+            border-top: 4px solid var(--university-gold);
         }
 
         footer i {
-            color: var(--gold);
+            color: var(--university-gold);
         }
 
         /* Responsive */
@@ -484,7 +520,7 @@ $notifications = $stmtNotifications->fetchAll();
                 font-size: 2.5rem;
             }
 
-            .navbar-brand {
+            .navbar-brand { 
                 font-size: 1.3rem;
             }
 
@@ -547,21 +583,10 @@ $notifications = $stmtNotifications->fetchAll();
     </div>
 </nav>
 
-<main class="container-fluid" style="padding: 2rem;">
+<main class="container-fluid" style="padding: 2rem; max-width: 1600px;">
     <div class="row">
-        <!-- Sidebar -->
-        <div class="col-lg-3 col-md-4 col-12 mb-4">
-            <div class="sidebar">
-                <h5><i class="bi bi-lightning-charge-fill me-2"></i>Quick Actions</h5>
-                <a class="btn btn-success" href="report_lost.php"><i class="bi bi-exclamation-triangle-fill me-2"></i>Report Lost Item</a>
-                <a class="btn btn-success" href="report_found.php"><i class="bi bi-bag-check-fill me-2"></i>Report Found Item</a>
-                <a class="btn btn-secondary" href="lost_items.php"><i class="bi bi-list-ul me-2"></i>Browse Lost Items</a>
-                <a class="btn btn-secondary" href="found_items.php"><i class="bi bi-inbox-fill me-2"></i>Browse Found Items</a>
-            </div>
-        </div>
-
-        <!-- Main Content -->
-        <div class="col-lg-9 col-md-8 col-12">
+        <!-- Main Content - Full Width -->
+        <div class="col-12">
             <!-- Quick Stats -->
             <div class="row mb-4">
                 <div class="col-12 mb-4">

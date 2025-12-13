@@ -56,6 +56,8 @@ $lostItems = $stmt->fetchAll();
             --danger: #DC2626;
             --gold: #FDB813;
             --navy: #002D72;
+            --university-blue: #003366;
+            --university-gold: #FFB81C;
         }
 
         * {
@@ -105,32 +107,37 @@ $lostItems = $stmt->fetchAll();
         }
 
         /* Navbar */
+         /* ========== NAVBAR STYLES - UPDATED TO MATCH STUDENT DASHBOARD ========== */
+        /* Changed from white background to blue gradient */
         .navbar {
-            background: var(--white);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            padding: 0.8rem 0;
-            border-bottom: 3px solid var(--primary-blue);
+            background: linear-gradient(135deg, var(--university-blue) 0%, var(--navy) 100%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            padding: 1rem 0;
+            border-bottom: 4px solid var(--university-gold);
         }
 
+        /* Changed brand text color from navy to white */
         .navbar-brand {
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 800;
-            font-size: 1.5rem;
-            color: var(--navy) !important;
+            font-size: 1.6rem;
+            color: var(--white) !important;
             letter-spacing: -0.02em;
             display: flex;
             align-items: center;
             text-transform: uppercase;
         }
 
+        /* Changed brand icon color from primary-blue to university-gold */
         .navbar-brand i {
-            color: var(--primary-blue);
-            margin-right: 0.5rem;
-            font-size: 1.8rem;
+            color: var(--university-gold);
+            margin-right: 0.6rem;
+            font-size: 2rem;
         }
 
+        /* Changed nav link color from text-dark to white */
         .navbar-nav .nav-link {
-            color: var(--text-dark) !important;
+            color: var(--white) !important;
             font-weight: 600;
             font-size: 0.85rem;
             margin: 0 0.2rem;
@@ -141,31 +148,36 @@ $lostItems = $stmt->fetchAll();
             letter-spacing: 0.03em;
         }
 
+        /* Changed hover background from light-blue to gold with transparency */
         .navbar-nav .nav-link:hover {
-            background: var(--light-blue);
-            color: var(--primary-blue) !important;
+            background: rgba(255, 184, 28, 0.2);
+            color: var(--university-gold) !important;
         }
 
+        /* Changed active state from primary-blue to university-gold */
         .navbar-nav .nav-link.active {
-            background: var(--primary-blue);
-            color: var(--white) !important;
+            background: var(--university-gold);
+            color: var(--university-blue) !important;
             font-weight: 700;
         }
 
+        /* Changed navbar text color from text-dark to white */
         .navbar-text {
-            color: var(--text-dark) !important;
+            color: var(--white) !important;
             font-weight: 500;
             font-size: 0.9rem;
         }
 
+        /* Changed strong text color from primary-blue to university-gold */
         .navbar-text strong {
-            color: var(--primary-blue);
+            color: var(--university-gold);
             font-weight: 700;
         }
-
-        .btn-outline-light {
-            border: 2px solid var(--primary-blue);
-            color: var(--primary-blue);
+        
+        /* Changed button border and text from primary-blue to university-gold */
+        .btn-outline-primary {
+            border: 2px solid var(--university-gold);
+            color: var(--university-gold);
             background: transparent;
             font-weight: 700;
             text-transform: uppercase;
@@ -173,11 +185,14 @@ $lostItems = $stmt->fetchAll();
             letter-spacing: 0.05em;
         }
 
-        .btn-outline-light:hover {
-            background: var(--primary-blue);
-            color: var(--white);
-            border-color: var(--primary-blue);
+        /* Changed button hover from primary-blue to university-gold */
+        .btn-outline-primary:hover {
+            background: var(--university-gold);
+            color: var(--university-blue);
+            border-color: var(--university-gold);
+            transform: translateY(-1px);
         }
+        /* ========== END OF NAVBAR STYLES UPDATE ========== */
 
         /* Main Content */
         main {
@@ -645,7 +660,7 @@ $lostItems = $stmt->fetchAll();
                                                 </span>
                                             <?php endif; ?>
                                         <?php else: ?>
-                                            <span class="badge bg-secondary mb-2">
+                                            <span class="badge bg-secondary mb-2" style="height: 2rem;">
                                                 <i class="bi bi-person-check me-1"></i>You reported this item
                                             </span>
                                         <?php endif; ?>
