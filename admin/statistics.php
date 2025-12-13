@@ -86,37 +86,8 @@ $topUsers = $stmtTopUsers->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statistics - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/admin_statistics.css">
-
-    <style>
-        .content-wrapper {
-            padding: 30px;
-        }
-        .stats-card { 
-            text-align: center; 
-            padding: 20px; 
-            border-radius: 12px; 
-            background: white;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .stats-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-        }
-        .stats-card h3 {
-            color: #1f2937;
-            font-weight: 700;
-            margin-bottom: 8px;
-            font-size: 2rem;
-        }
-        .stats-card p {
-            color: #6b7280;
-            margin: 0;
-            font-size: 14px;
-        }
-    </style>
 </head>
 <body class="bg-light">
 
@@ -124,46 +95,71 @@ $topUsers = $stmtTopUsers->fetchAll();
 
 <main class="content-wrapper">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>System Statistics & Analytics</h2>
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="header-left">
+            <h1><i class="bi bi-graph-up-arrow"></i> Statistics & Analytics</h1>
+            <p class="header-subtitle">System performance and insights</p>
+        </div>
+    
     </div>
 
     <!-- Overall Statistics -->
-    <section class="mb-5">
-        <h4 class="mb-3">Overall Statistics</h4>
-        <div class="row">
-            <div class="col-md-2 col-sm-6">
-                <div class="stats-card">
+    <section class="stats-section">
+        <div class="section-header">
+            <h2><i class="bi bi-bar-chart-fill"></i> Overall System Statistics</h2>
+        </div>
+        <div class="stats-grid-main">
+            <div class="stat-card-large">
+                <div class="stat-icon blue">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <div class="stat-content">
                     <h3><?php echo $stats['total_users']; ?></h3>
                     <p>Total Students</p>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6">
-                <div class="stats-card">
+            <div class="stat-card-large">
+                <div class="stat-icon yellow">
+                    <i class="bi bi-search"></i>
+                </div>
+                <div class="stat-content">
                     <h3><?php echo $stats['total_lost']; ?></h3>
                     <p>Total Lost Items</p>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6">
-                <div class="stats-card">
+            <div class="stat-card-large">
+                <div class="stat-icon red">
+                    <i class="bi bi-bag-check-fill"></i>
+                </div>
+                <div class="stat-content">
                     <h3><?php echo $stats['total_found']; ?></h3>
                     <p>Total Found Items</p>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6">
-                <div class="stats-card">
+            <div class="stat-card-large">
+                <div class="stat-icon green">
+                    <i class="bi bi-journal-text"></i>
+                </div>
+                <div class="stat-content">
                     <h3><?php echo $stats['total_claims']; ?></h3>
                     <p>Total Claims</p>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6">
-                <div class="stats-card">
+            <div class="stat-card-large">
+                <div class="stat-icon purple">
+                    <i class="bi bi-box-arrow-in-down"></i>
+                </div>
+                <div class="stat-content">
                     <h3><?php echo $stats['items_returned']; ?></h3>
                     <p>Items Returned</p>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6">
-                <div class="stats-card">
+            <div class="stat-card-large success-rate">
+                <div class="stat-icon orange">
+                    <i class="bi bi-trophy-fill"></i>
+                </div>
+                <div class="stat-content">
                     <h3><?php echo $successRate; ?>%</h3>
                     <p>Success Rate</p>
                 </div>
@@ -172,30 +168,44 @@ $topUsers = $stmtTopUsers->fetchAll();
     </section>
 
     <!-- Recent Activity (Last 30 Days) -->
-    <section class="mb-5">
-        <h4 class="mb-3">Last 30 Days Activity</h4>
-        <div class="row">
-            <div class="col-md-3 col-sm-6">
-                <div class="stats-card">
-                    <h3><?php echo $recentStats['lost_items_30d']; ?></h3>
+    <section class="recent-section">
+        <div class="section-header">
+            <h2><i class="bi bi-clock-history"></i> Last 30 Days Activity</h2>
+        </div>
+        <div class="recent-stats-grid">
+            <div class="recent-stat-card">
+                <div class="recent-icon lost">
+                    <i class="bi bi-search"></i>
+                </div>
+                <div class="recent-content">
+                    <h4><?php echo $recentStats['lost_items_30d']; ?></h4>
                     <p>Lost Items Reported</p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="stats-card">
-                    <h3><?php echo $recentStats['found_items_30d']; ?></h3>
+            <div class="recent-stat-card">
+                <div class="recent-icon found">
+                    <i class="bi bi-bag-check"></i>
+                </div>
+                <div class="recent-content">
+                    <h4><?php echo $recentStats['found_items_30d']; ?></h4>
                     <p>Found Items Reported</p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="stats-card">
-                    <h3><?php echo $recentStats['claims_30d']; ?></h3>
+            <div class="recent-stat-card">
+                <div class="recent-icon claims">
+                    <i class="bi bi-journal-text"></i>
+                </div>
+                <div class="recent-content">
+                    <h4><?php echo $recentStats['claims_30d']; ?></h4>
                     <p>Claims Submitted</p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="stats-card">
-                    <h3><?php echo $recentStats['returned_30d']; ?></h3>
+            <div class="recent-stat-card">
+                <div class="recent-icon returned">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+                <div class="recent-content">
+                    <h4><?php echo $recentStats['returned_30d']; ?></h4>
                     <p>Items Returned</p>
                 </div>
             </div>
@@ -203,184 +213,98 @@ $topUsers = $stmtTopUsers->fetchAll();
     </section>
 
     <!-- Status Breakdown Tables -->
-    <div class="row mb-5">
-        <!-- Lost Items by Status -->
-        <div class="col-lg-4 mb-4">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Lost Items by Status</h5>
-                </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
-                            <tr>
-                                <th>Status</th>
-                                <th class="text-center">Count</th>
-                                <th class="text-center">Percentage</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+    <section class="breakdown-section">
+        <div class="section-header">
+            <h2><i class="bi bi-pie-chart-fill"></i> Status Breakdown</h2>
+        </div>
+        <div class="row g-4">
+            
+            <!-- Lost Items by Status -->
+            <div class="col-lg-4">
+                <div class="breakdown-card lost-card">
+                    <div class="breakdown-header">
+                        <i class="bi bi-search"></i>
+                        <h3>Lost Items by Status</h3>
+                    </div>
+                    <div class="breakdown-body">
+                        <div class="breakdown-list">
                             <?php foreach ($lostByStatus as $status => $count): ?>
-                                <tr>
-                                    <td><?php echo ucfirst(str_replace('_', ' ', $status)); ?></td>
-                                    <td class="text-center"><strong><?php echo $count; ?></strong></td>
-                                    <td class="text-center">
-                                        <?php
-                                        $percentage = $stats['total_lost'] > 0 ? round(($count / $stats['total_lost']) * 100, 1) : 0;
-                                        ?>
-                                        <span class="badge bg-primary"><?php echo $percentage; ?>%</span>
-                                    </td>
-                                </tr>
+                                <?php $percentage = $stats['total_lost'] > 0 ? round(($count / $stats['total_lost']) * 100, 1) : 0; ?>
+                                <div class="breakdown-item">
+                                    <div class="breakdown-label">
+                                        <span class="status-name"><?php echo ucfirst(str_replace('_', ' ', $status)); ?></span>
+                                        <span class="status-count"><?php echo $count; ?></span>
+                                    </div>
+                                    <div class="breakdown-progress">
+                                        <div class="progress-bar" style="width: <?php echo $percentage; ?>%"></div>
+                                    </div>
+                                    <span class="breakdown-percentage"><?php echo $percentage; ?>%</span>
+                                </div>
                             <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Found Items by Status -->
-        <div class="col-lg-4 mb-4">
-            <div class="card">
-                <div class="card-header bg-success text-white">
-                    <h5 class="mb-0">Found Items by Status</h5>
-                </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
-                            <tr>
-                                <th>Status</th>
-                                <th class="text-center">Count</th>
-                                <th class="text-center">Percentage</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+            <!-- Found Items by Status -->
+            <div class="col-lg-4">
+                <div class="breakdown-card found-card">
+                    <div class="breakdown-header">
+                        <i class="bi bi-bag-check"></i>
+                        <h3>Found Items by Status</h3>
+                    </div>
+                    <div class="breakdown-body">
+                        <div class="breakdown-list">
                             <?php foreach ($foundByStatus as $status => $count): ?>
-                                <tr>
-                                    <td><?php echo ucfirst(str_replace('_', ' ', $status)); ?></td>
-                                    <td class="text-center"><strong><?php echo $count; ?></strong></td>
-                                    <td class="text-center">
-                                        <?php
-                                        $percentage = $stats['total_found'] > 0 ? round(($count / $stats['total_found']) * 100, 1) : 0;
-                                        ?>
-                                        <span class="badge bg-success"><?php echo $percentage; ?>%</span>
-                                    </td>
-                                </tr>
+                                <?php $percentage = $stats['total_found'] > 0 ? round(($count / $stats['total_found']) * 100, 1) : 0; ?>
+                                <div class="breakdown-item">
+                                    <div class="breakdown-label">
+                                        <span class="status-name"><?php echo ucfirst(str_replace('_', ' ', $status)); ?></span>
+                                        <span class="status-count"><?php echo $count; ?></span>
+                                    </div>
+                                    <div class="breakdown-progress">
+                                        <div class="progress-bar" style="width: <?php echo $percentage; ?>%"></div>
+                                    </div>
+                                    <span class="breakdown-percentage"><?php echo $percentage; ?>%</span>
+                                </div>
                             <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Claims by Status -->
-        <div class="col-lg-4 mb-4">
-            <div class="card">
-                <div class="card-header bg-warning text-dark">
-                    <h5 class="mb-0">Claims by Status</h5>
-                </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
-                            <tr>
-                                <th>Status</th>
-                                <th class="text-center">Count</th>
-                                <th class="text-center">Percentage</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+            <!-- Claims by Status -->
+            <div class="col-lg-4">
+                <div class="breakdown-card claims-card">
+                    <div class="breakdown-header">
+                        <i class="bi bi-journal-text"></i>
+                        <h3>Claims by Status</h3>
+                    </div>
+                    <div class="breakdown-body">
+                        <div class="breakdown-list">
                             <?php foreach ($claimsByStatus as $status => $count): ?>
-                                <tr>
-                                    <td><?php echo ucfirst($status); ?></td>
-                                    <td class="text-center"><strong><?php echo $count; ?></strong></td>
-                                    <td class="text-center">
-                                        <?php
-                                        $percentage = $stats['total_claims'] > 0 ? round(($count / $stats['total_claims']) * 100, 1) : 0;
-                                        ?>
-                                        <span class="badge bg-warning text-dark"><?php echo $percentage; ?>%</span>
-                                    </td>
-                                </tr>
+                                <?php $percentage = $stats['total_claims'] > 0 ? round(($count / $stats['total_claims']) * 100, 1) : 0; ?>
+                                <div class="breakdown-item">
+                                    <div class="breakdown-label">
+                                        <span class="status-name"><?php echo ucfirst($status); ?></span>
+                                        <span class="status-count"><?php echo $count; ?></span>
+                                    </div>
+                                    <div class="breakdown-progress">
+                                        <div class="progress-bar" style="width: <?php echo $percentage; ?>%"></div>
+                                    </div>
+                                    <span class="breakdown-percentage"><?php echo $percentage; ?>%</span>
+                                </div>
                             <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Top Active Users -->
-    <section>
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">Most Active Users (Top 5)</h5>
-            </div>
-            <div class="card-body p-0">
-                <?php if (count($topUsers) > 0): ?>
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
-                            <tr>
-                                <th>Rank</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th class="text-center">Lost Items</th>
-                                <th class="text-center">Found Items</th>
-                                <th class="text-center">Total</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php 
-                            $rank = 1;
-                            foreach ($topUsers as $user): 
-                            ?>
-                                <tr>
-                                    <td>
-                                        <?php if ($rank == 1): ?>
-                                            <span class="badge bg-warning text-dark fs-6">🥇 <?php echo $rank; ?></span>
-                                        <?php elseif ($rank == 2): ?>
-                                            <span class="badge bg-secondary fs-6">🥈 <?php echo $rank; ?></span>
-                                        <?php elseif ($rank == 3): ?>
-                                            <span class="badge text-white fs-6" style="background: #cd7f32;">🥉 <?php echo $rank; ?></span>
-                                        <?php else: ?>
-                                            <span class="badge bg-light text-dark"><?php echo $rank; ?></span>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td><?php echo htmlspecialchars($user['name']); ?></td>
-                                    <td><small class="text-muted"><?php echo htmlspecialchars($user['email']); ?></small></td>
-                                    <td class="text-center">
-                                        <span class="badge bg-danger"><?php echo $user['lost_items']; ?></span>
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="badge bg-success"><?php echo $user['found_items']; ?></span>
-                                    </td>
-                                    <td class="text-center">
-                                        <strong class="text-primary fs-5"><?php echo $user['total_items']; ?></strong>
-                                    </td>
-                                </tr>
-                            <?php 
-                            $rank++;
-                            endforeach; 
-                            ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php else: ?>
-                    <div class="alert alert-info m-3">
-                        <i class="bi bi-info-circle"></i> No activity data available yet.
-                    </div>
-                <?php endif; ?>
             </div>
         </div>
     </section>
 
 </main>
 
-<footer class="bg-dark text-white text-center py-3">
+<footer>
     &copy; 2024 Campus Lost & Found System - Admin Panel
 </footer>
 

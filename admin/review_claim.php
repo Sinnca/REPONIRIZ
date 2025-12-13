@@ -210,57 +210,84 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review Claim Request - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/admin_reviewclaim.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body>
 <?php include '../components/sidebar.php'; ?>
 
-<main class="container mb-5">
-    <h1 class="mb-3">Review Claim Request</h1>
+<main class="content-wrapper">
+    <h1>Review Claim Request</h1>
    
-
-    <?php if ($error): ?><div class="alert alert-danger"><?= htmlspecialchars($error) ?></div><?php endif; ?>
-    <?php if ($success): ?><div class="alert alert-success"><?= htmlspecialchars($success) ?></div><?php endif; ?>
+    <?php if ($error): ?>
+        <div class="alert alert-danger">
+            <?= htmlspecialchars($error) ?>
+        </div>
+    <?php endif; ?>
+    
+    <?php if ($success): ?>
+        <div class="alert alert-success">
+            <?= htmlspecialchars($success) ?>
+        </div>
+    <?php endif; ?>
 
     <!-- Claim Details -->
-    <div class="card mb-4">
+    <div class="card">
         <div class="card-body">
             <h5 class="card-title">Claim Request Details</h5>
             <p><strong>Claim ID:</strong> <?= $claim['id'] ?></p>
             <p><strong>Status:</strong> <?= getStatusBadge($claim['status']) ?></p>
             <p><strong>Requested By:</strong> <?= htmlspecialchars($claim['requester_name']) ?> (<?= htmlspecialchars($claim['requester_email']) ?>)</p>
             <p><strong>Request Date:</strong> <?= formatDateTime($claim['created_at']) ?></p>
-            <?php if ($claim['schedule_date']): ?><p><strong>Scheduled:</strong> <?= formatDateTime($claim['schedule_date']) ?></p><?php endif; ?>
-            <?php if ($claim['notes']): ?><p><strong>Notes:</strong> <?= nl2br(htmlspecialchars($claim['notes'])) ?></p><?php endif; ?>
+            <?php if ($claim['schedule_date']): ?>
+                <p><strong>Scheduled:</strong> <?= formatDateTime($claim['schedule_date']) ?></p>
+            <?php endif; ?>
+            <?php if ($claim['notes']): ?>
+                <p><strong>Notes:</strong> <?= nl2br(htmlspecialchars($claim['notes'])) ?></p>
+            <?php endif; ?>
         </div>
     </div>
 
     <!-- Claimer Info & Photo -->
-    <div class="card mb-4">
-        <div class="card-body row g-3">
-            <div class="col-md-4">
-                <img src="<?= $claim['claim_photo'] ? getImageUrl($claim['claim_photo'], 'claim') : 'https://via.placeholder.com/300x300?text=No+Photo' ?>" class="img-fluid rounded">
-            </div>
-            <div class="col-md-8">
-                <h5>Claimer Information</h5>
-                <p><strong>Name:</strong> <?= htmlspecialchars($claim['requester_name']) ?></p>
-                <p><strong>Email:</strong> <?= htmlspecialchars($claim['requester_email']) ?></p>
-                <?php if ($claim['notes']): ?><p><strong>Notes:</strong> <?= nl2br(htmlspecialchars($claim['notes'])) ?></p><?php endif; ?>
+    <div class="card">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <img src="<?= $claim['claim_photo'] ? getImageUrl($claim['claim_photo'], 'claim') : 'https://via.placeholder.com/300x300?text=No+Photo' ?>" 
+                         class="img-fluid rounded" 
+                         alt="Claimer Photo">
+                </div>
+                <div class="col-md-8">
+                    <h5>Claimer Information</h5>
+                    <p><strong>Name:</strong> <?= htmlspecialchars($claim['requester_name']) ?></p>
+                    <p><strong>Email:</strong> <?= htmlspecialchars($claim['requester_email']) ?></p>
+                    <?php if ($claim['notes']): ?>
+                        <p><strong>Notes:</strong> <?= nl2br(htmlspecialchars($claim['notes'])) ?></p>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Found Item -->
     <?php if ($claim['found_item_id']): ?>
-        <div class="card mb-4">
-            <div class="card-body row g-3">
-                <div class="col-md-4">
-                    <?php if ($claim['found_photo']): ?><img src="<?= getImageUrl($claim['found_photo'], 'found') ?>" class="img-fluid rounded"><?php endif; ?>
-                </div>
-                <div class="col-md-8">
-                    <h5>Item Information</h5>
-                    <h5><?= htmlspecialchars($claim['found_item_name']) ?></h5>
-                    <p><?= nl2br(htmlspecialchars($claim['found_description'])) ?></p>
-                    <p><strong>Date Found:</strong> <?= formatDate($claim['date_found']) ?></p>
+        <div class="card">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <?php if ($claim['found_photo']): ?>
+                            <img src="<?= getImageUrl($claim['found_photo'], 'found') ?>" 
+                                 class="img-fluid rounded" 
+                                 alt="Found Item Photo">
+                        <?php else: ?>
+                            <div class="no-image-placeholder">No Photo Available</div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-8">
+                        <h5>Item Information</h5>
+                        <h6><?= htmlspecialchars($claim['found_item_name']) ?></h6>
+                        <p><?= nl2br(htmlspecialchars($claim['found_description'])) ?></p>
+                        <p><strong>Date Found:</strong> <?= formatDate($claim['date_found']) ?></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -272,21 +299,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="row g-4">
                 <?php if ($claim['status'] === 'pending'): ?>
                     <div class="col-md-6">
-                        <div class="card p-3">
+                        <div class="action-card">
                             <h5>Approve & Schedule</h5>
                             <form method="POST">
                                 <input type="hidden" name="action" value="approve">
-                                <div class="mb-2">
-                                    <label>Date</label>
-                                    <input type="date" name="schedule_date" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                                <div class="mb-3">
+                                    <label class="form-label">Date</label>
+                                    <input type="date" 
+                                           name="schedule_date" 
+                                           class="form-control" 
+                                           min="<?= date('Y-m-d') ?>" 
+                                           required>
                                 </div>
-                                <div class="mb-2">
-                                    <label>Time</label>
-                                    <input type="time" name="schedule_time" class="form-control" required>
+                                <div class="mb-3">
+                                    <label class="form-label">Time</label>
+                                    <input type="time" 
+                                           name="schedule_time" 
+                                           class="form-control" 
+                                           required>
                                 </div>
-                                <div class="mb-2">
-                                    <label>Notes (Optional)</label>
-                                    <textarea name="admin_notes" class="form-control" rows="2"></textarea>
+                                <div class="mb-3">
+                                    <label class="form-label">Notes (Optional)</label>
+                                    <textarea name="admin_notes" 
+                                              class="form-control" 
+                                              rows="3"
+                                              placeholder="Add any additional information for the claimer..."></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-success">Approve & Schedule</button>
                             </form>
@@ -295,44 +332,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endif; ?>
 
                 <div class="col-md-6">
-                    <div class="card p-3">
+                    <div class="action-card">
                         <h5><?= $claim['status'] === 'pending' ? 'Reject Claim' : 'Reject Scheduled Claim' ?></h5>
                         <form method="POST">
                             <input type="hidden" name="action" value="reject">
-                            <div class="mb-2">
-                                <label>Reason</label>
-                                <textarea name="reject_reason" class="form-control" rows="2" required></textarea>
+                            <div class="mb-3">
+                                <label class="form-label">Reason</label>
+                                <textarea name="reject_reason" 
+                                          class="form-control" 
+                                          rows="3" 
+                                          placeholder="Provide a reason for rejection..."
+                                          required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Reject this claim?')">Reject</button>
+                            <button type="submit" 
+                                    class="btn btn-danger" 
+                                    onclick="return confirm('Reject this claim?')">
+                                Reject
+                            </button>
                         </form>
                     </div>
                 </div>
 
                 <?php if ($claim['status'] === 'scheduled'): ?>
                     <div class="col-12">
-                        <div class="card p-3 mt-3">
+                        <div class="action-card">
                             <h5>Complete Claim</h5>
                             <p><strong>Scheduled:</strong> <?= formatDateTime($claim['schedule_date']) ?></p>
-                            <ul>
-                                <li>Verify student ID</li>
-                                <li>Verify ownership</li>
-                                <li>Item matches description</li>
-                            </ul>
+                            
+                            <div class="verification-checklist">
+                                <strong>Verification Checklist:</strong>
+                                <ul>
+                                    <li>Verify student ID</li>
+                                    <li>Verify ownership</li>
+                                    <li>Item matches description</li>
+                                </ul>
+                            </div>
+                            
                             <form method="POST">
                                 <input type="hidden" name="action" value="complete">
-                                <button type="submit" class="btn btn-primary" onclick="return confirm('Mark this claim as completed?')">Complete Claim</button>
+                                <button type="submit" 
+                                        class="btn btn-primary" 
+                                        onclick="return confirm('Mark this claim as completed?')">
+                                    Complete Claim
+                                </button>
                             </form>
                         </div>
                     </div>
                 <?php endif; ?>
             </div>
         <?php else: ?>
-            <div class="alert alert-info">This claim has been <?= $claim['status'] ?>.</div>
+            <div class="alert alert-info">
+                This claim has been <?= $claim['status'] ?>.
+            </div>
         <?php endif; ?>
     <?php endif; ?>
 </main>
 
-<footer class="bg-dark text-white text-center py-3">
+<footer>
     &copy; 2024 Campus Lost & Found System - Admin Panel
 </footer>
 

@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php else: ?>
 
         <!-- ITEM DETAILS -->
-        <div class="card">
+        <div class="card">  
             <div class="card-header bg-primary text-white">
                 Item Details
             </div>
