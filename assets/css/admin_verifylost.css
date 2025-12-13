@@ -39,6 +39,64 @@
             font-weight: 600;
             font-size: 1rem;
         }
+        /* Page Header with Close Button */
+.page-header-with-close {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.page-header-with-close h1 {
+    margin: 0;
+}
+
+.close-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    color: #6b7280;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.close-btn:hover {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: white;
+    transform: rotate(90deg);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+}
+
+.close-btn i {
+    font-size: 1.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header-with-close {
+        gap: 12px;
+    }
+    
+    .page-header-with-close h1 {
+        font-size: 1.5rem;
+    }
+    
+    .close-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .close-btn i {
+        font-size: 1.125rem;
+    }
+}
 
         img.thumb, .img-fluid {
             border-radius: 8px;

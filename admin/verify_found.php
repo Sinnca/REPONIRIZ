@@ -115,7 +115,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <main class="content-wrapper">
 
-<h1>Verify Found Item</h1>
+<div class="page-header-with-close">
+        <h1>Verify Found Item</h1>
+        <a href="pending_lost.php" class="close-btn" title="Back to Pending Items">
+            <i class="bi bi-x-lg"></i>
+        </a>
+    </div>
 
 <?php if ($error): ?>
     <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>

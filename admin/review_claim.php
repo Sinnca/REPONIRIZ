@@ -216,7 +216,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include '../components/sidebar.php'; ?>
 
 <main class="content-wrapper">
-    <h1>Review Claim Request</h1>
+    <div class="page-header-with-close">
+        <h1>Review Claim Request</h1>
+        <a href="pending_lost.php" class="close-btn" title="Back to Pending Items">
+            <i class="bi bi-x-lg"></i>
+        </a>
+    </div>
    
     <?php if ($error): ?>
         <div class="alert alert-danger">

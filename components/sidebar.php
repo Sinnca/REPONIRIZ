@@ -283,17 +283,18 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </div>
 
             <div class="nav-submenu">
-                <a class="sidebar-nav-link <?php echo $currentPage == 'pending_lost.php' ? 'active' : ''; ?>" href="pending_lost.php">
+               <a class="sidebar-nav-link <?php echo ($currentPage == 'pending_lost.php' || $currentPage == 'verify_lost.php') ? 'active' : ''; ?>" href="pending_lost.php">
                     <i class="bi bi-search"></i>
                     <span class="ms-2">Pending Lost</span>
                 </a>
 
-                <a class="sidebar-nav-link <?php echo $currentPage == 'pending_found.php' ? 'active' : ''; ?>" href="pending_found.php">
+                <a class="sidebar-nav-link <?php echo ($currentPage == 'pending_found.php' || $currentPage == 'verify_found.php') ? 'active' : ''; ?>" href="pending_found.php">
+
                     <i class="bi bi-bag-check"></i>
                     <span class="ms-2">Pending Found</span>
                 </a>
 
-                <a class="sidebar-nav-link <?php echo $currentPage == 'claim_requests.php' ? 'active' : ''; ?>" href="claim_requests.php">
+                <a class="sidebar-nav-link <?php echo ($currentPage == 'claim_requests.php' || $currentPage == 'review_claim.php') ? 'active' : ''; ?>" href="claim_requests.php">
                     <i class="bi bi-journal-text"></i>
                     <span class="ms-2">Claim Requests</span>
                 </a>

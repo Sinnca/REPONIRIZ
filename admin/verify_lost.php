@@ -89,13 +89,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="../assets/js/main.js" defer></script>
 </head>
-<body>
+<body class="bg-light">
 
 <?php include '../components/sidebar.php'; ?>
 
 <main class="content-wrapper">
 
-    <h1>Verify Lost Item</h1>
+    <!-- Page Header with Close Button -->
+    <div class="page-header-with-close">
+        <h1>Verify Lost Item</h1>
+        <a href="pending_lost.php" class="close-btn" title="Back to Pending Items">
+            <i class="bi bi-x-lg"></i>
+        </a>
+    </div>
 
     <?php if ($error): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
@@ -107,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php else: ?>
 
         <!-- ITEM DETAILS -->
-        <div class="card">  
+        <div class="card">
             <div class="card-header bg-primary text-white">
                 Item Details
             </div>
