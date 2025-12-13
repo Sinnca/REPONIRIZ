@@ -58,15 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- CUSTOM CSS -->
     <style>
         :root {
-            --primary-blue: #0066FF;
-            --secondary-blue: #E6F0FF;
-            --dark-blue: #003D99;
-            --light-blue: #F0F7FF;
-            --accent-blue: #3385FF;
-            --purple: #7C3AED;
-            --light-purple: #EDE9FE;
-            --cyan: #06B6D4;
-            --light-cyan: #CFFAFE;
+            --university-blue: #003366;
+            --university-gold: #FFB81C;
+            --navy: #002D72;
+            --burgundy: #8B1538;
+            --forest-green: #1B5E20;
+            --slate: #455A64;
+            --light-blue: #E3F2FD;
+            --light-gold: #FFF8E1;
             --text-dark: #1a1a2e;
             --text-light: #6B7280;
             --white: #FFFFFF;
@@ -81,68 +80,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-sizing: border-box;
         }
 
-        /* Replace the existing body background styles with this */
-
-/* Replace the existing body and header background styles with this */
-
-body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 25%, #60a5fa 50%, #93c5fd 75%, #dbeafe 100%);
-    color: var(--text-dark);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    position: relative;
-}
-
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* HEADER with complementary gradient */
-header {
-    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-    padding: 2.5rem 0;
-    border-bottom: 3px solid #60a5fa;
-    animation: slideDown 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-header h1 {
-    font-size: 3rem;
-    font-weight: 900;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-    letter-spacing: -1.5px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-header h1 i {
-    color: #93c5fd;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-header p {
-    font-size: 1.15rem;
-    color: #dbeafe;
-    font-weight: 500;
-    margin: 0;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-        main, header, footer {
-            position: relative;
-            z-index: 1;
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -151,7 +96,35 @@ header p {
         }
 
         /* HEADER */
-    
+        header {
+            background: linear-gradient(135deg, var(--university-blue) 0%, var(--navy) 100%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--university-gold);
+            animation: slideDown 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 i {
+            color: var(--university-gold);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: #E3F2FD;
+            font-weight: 500;
+            margin: 0;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
 
         /* MAIN CONTAINER */
         main {
@@ -161,6 +134,7 @@ header p {
             justify-content: center;
             padding: 3rem 1rem;
             animation: fadeIn 1s ease-out;
+            background: #FFFFFF;
         }
 
         /* LOGIN SECTION */
@@ -170,43 +144,30 @@ header p {
         }
 
         .login-card {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            border-radius: 32px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            background: var(--white);
+            border-radius: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             padding: 4rem 3.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            border: 2px solid var(--border-color);
+            border-top: 6px solid var(--university-blue);
             animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .login-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, var(--purple) 0%, var(--primary-blue) 50%, var(--cyan) 100%);
-        }
-
         .login-card h2 {
-            background: linear-gradient(135deg, var(--purple) 0%, var(--primary-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--university-blue);
             font-weight: 900;
             font-size: 2.5rem;
             text-align: center;
             margin-bottom: 3rem;
             letter-spacing: -1px;
+            text-transform: uppercase;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .login-card h2 i {
-            background: linear-gradient(135deg, var(--purple) 0%, var(--primary-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--university-gold);
             font-size: 2.2rem;
         }
 
@@ -222,11 +183,13 @@ header p {
             font-size: 0.95rem;
             display: flex;
             align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
 
         .form-label i {
             margin-right: 0.5rem;
-            color: var(--purple);
+            color: var(--university-blue);
         }
 
         .input-wrapper {
@@ -238,17 +201,14 @@ header p {
             left: 1.3rem;
             top: 50%;
             transform: translateY(-50%);
-            background: linear-gradient(135deg, var(--purple) 0%, var(--primary-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--university-blue);
             font-size: 1.2rem;
             z-index: 2;
         }
 
         .form-control {
             border: 2px solid var(--border-color);
-            border-radius: 16px;
+            border-radius: 4px;
             padding: 1.1rem 1.3rem 1.1rem 3.5rem;
             font-size: 1rem;
             transition: all 0.3s ease;
@@ -257,8 +217,8 @@ header p {
         }
 
         .form-control:focus {
-            border-color: var(--purple);
-            box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.1);
+            border-color: var(--university-blue);
+            box-shadow: 0 0 0 4px rgba(0, 51, 102, 0.1);
             outline: none;
         }
 
@@ -268,15 +228,15 @@ header p {
 
         /* BUTTON */
         .btn-login {
-            background: linear-gradient(135deg, var(--purple) 0%, var(--primary-blue) 50%, var(--cyan) 100%);
+            background: var(--university-blue);
             border: none;
-            border-radius: 16px;
+            border-radius: 4px;
             padding: 1.2rem 3rem;
             font-weight: 800;
             font-size: 1.1rem;
             color: var(--white);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+            box-shadow: 0 4px 12px rgba(0, 51, 102, 0.3);
             letter-spacing: 0.5px;
             width: 100%;
             text-transform: uppercase;
@@ -284,18 +244,19 @@ header p {
         }
 
         .btn-login:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(124, 58, 237, 0.5);
+            background: var(--navy);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 51, 102, 0.4);
         }
 
         .btn-login:active {
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         /* ALERT */
         .alert {
             border: none;
-            border-radius: 16px;
+            border-radius: 4px;
             padding: 1.2rem 1.5rem;
             margin-bottom: 2rem;
             font-weight: 600;
@@ -303,42 +264,38 @@ header p {
         }
 
         .alert-danger {
-            background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+            background: #FEE2E2;
             color: #991B1B;
             border-left: 5px solid var(--error);
         }
 
         .alert-success {
-            background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+            background: #D1FAE5;
             color: #065F46;
             border-left: 5px solid var(--success);
         }
 
         /* FOOTER */
         footer {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--university-blue) 0%, var(--navy) 100%);
+            color: var(--white);
             padding: 2rem 0;
-            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
             animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             margin-top: auto;
-            border-top: 3px solid var(--purple);
+            border-top: 4px solid var(--university-gold);
         }
 
         footer p {
             margin: 0;
             font-weight: 600;
             font-size: 0.95rem;
-            color: var(--text-light);
+            color: var(--white);
         }
 
         footer i {
             margin-right: 0.5rem;
-            background: linear-gradient(135deg, var(--purple) 0%, var(--primary-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--university-gold);
         }
 
         /* HELPER TEXT */
@@ -351,7 +308,7 @@ header p {
         }
 
         .helper-text i {
-            color: var(--purple);
+            color: var(--university-blue);
         }
 
         /* ANIMATIONS */
@@ -430,7 +387,7 @@ header p {
 
             .login-card {
                 padding: 2.5rem 1.5rem;
-                border-radius: 24px;
+                border-radius: 0;
             }
 
             .form-control {
@@ -466,25 +423,6 @@ header p {
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-
-        /* DECORATIVE ELEMENTS */
-        .login-card::after {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            top: -200px;
-            right: -200px;
-            pointer-events: none;
-        }
-
-        /* Floating animation for decorative element */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
     </style>
 
     <script src="assets/js/main.js" defer></script>
@@ -494,7 +432,7 @@ header p {
 
 <!-- HEADER -->
 <header class="text-center">
-    <div class="container" >
+    <div class="container">
         <h1><i class="bi bi-box-seam"></i> Campus Lost & Found System</h1>
         <p>Welcome! Please login with your institutional account</p>
     </div>
@@ -504,7 +442,7 @@ header p {
     <div class="login-container">
         <!-- LOGIN CARD -->
         <div class="login-card">
-            <h2><i class="bi bi-shield-lock"></i>Sign In</h2>
+            <h2><i class="bi bi-shield-lock"></i> Sign In</h2>
 
             <!-- ERROR ALERT -->
             <?php if (!empty($error)): ?>
@@ -522,16 +460,16 @@ header p {
                     <div class="input-wrapper">
                         <i class="bi bi-envelope-fill input-icon"></i>
                         <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            class="form-control"
-                            placeholder="your.email@institution.edu"
-                            required
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="form-control"
+                                placeholder="your.email@institution.edu"
+                                required
                         >
                     </div>
                 </div>
-                
+
                 <div class="form-group-custom">
                     <label for="password" class="form-label">
                         <i class="bi bi-lock"></i>Password
@@ -539,12 +477,12 @@ header p {
                     <div class="input-wrapper">
                         <i class="bi bi-lock-fill input-icon"></i>
                         <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            class="form-control"
-                            placeholder="Enter your password"
-                            required
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-control"
+                                placeholder="Enter your password"
+                                required
                         >
                     </div>
                 </div>
