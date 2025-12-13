@@ -111,7 +111,7 @@ $topUsers = $stmtTopUsers->fetchAll();
         </div>
         <div class="stats-grid-main">
             <div class="stat-card-large">
-                <div class="stat-icon blue">
+                <div class="stat-icon pink">
                     <i class="bi bi-people-fill"></i>
                 </div>
                 <div class="stat-content">
@@ -120,7 +120,7 @@ $topUsers = $stmtTopUsers->fetchAll();
                 </div>
             </div>
             <div class="stat-card-large">
-                <div class="stat-icon yellow">
+                <div class="stat-icon blue">
                     <i class="bi bi-search"></i>
                 </div>
                 <div class="stat-content">
@@ -129,7 +129,7 @@ $topUsers = $stmtTopUsers->fetchAll();
                 </div>
             </div>
             <div class="stat-card-large">
-                <div class="stat-icon red">
+                <div class="stat-icon yellow">
                     <i class="bi bi-bag-check-fill"></i>
                 </div>
                 <div class="stat-content">
@@ -138,7 +138,7 @@ $topUsers = $stmtTopUsers->fetchAll();
                 </div>
             </div>
             <div class="stat-card-large">
-                <div class="stat-icon green">
+                <div class="stat-icon purple">
                     <i class="bi bi-journal-text"></i>
                 </div>
                 <div class="stat-content">
@@ -147,7 +147,7 @@ $topUsers = $stmtTopUsers->fetchAll();
                 </div>
             </div>
             <div class="stat-card-large">
-                <div class="stat-icon purple">
+                <div class="stat-icon green">
                     <i class="bi bi-box-arrow-in-down"></i>
                 </div>
                 <div class="stat-content">
