@@ -621,6 +621,57 @@ function getFoundItemName($foundItemId, $matchedFoundItems) {
         .found-item-card::before {
             background: linear-gradient(180deg, var(--success) 0%, var(--university-gold) 100%);
         }
+
+        /* Status Badge Color Styles - Add this to your existing CSS */
+
+/* Yellow for pending status */
+.badge.badge-warning {
+    color: #F59E0B !important; /* Yellow */
+    background-color: transparent !important;
+    font-weight: 700 !important;
+}
+
+/* Gray for listed status */
+.badge.badge-info {
+    color: #6B7280 !important; /* Gray */
+    background-color: transparent !important;
+    font-weight: 700 !important;
+}
+
+/* Green for verified, ready_for_claim, and approved statuses */
+.badge.badge-success {
+    color: #10B981 !important; /* Green */
+    background-color: transparent !important;
+    font-weight: 700 !important;
+}
+
+/* Dark Gray for returned, claimed, and completed statuses */
+.badge.badge-secondary {
+    color: #4B5563 !important; /* Dark Gray */
+    background-color: transparent !important;
+    font-weight: 700 !important;
+}
+
+/* Red for rejected status */
+.badge.badge-danger {
+    color: #DC2626 !important; /* Red */
+    background-color: transparent !important;
+    font-weight: 700 !important;
+}
+
+/* Blue for scheduled status */
+.badge.badge-primary {
+    color: #0EA5E9 !important; /* Blue */
+    background-color: transparent !important;
+    font-weight: 700 !important;
+}
+
+/* Light Gray for unknown/default statuses */
+.badge.badge-light {
+    color: #9CA3AF !important; /* Light Gray */
+    background-color: transparent !important;
+    font-weight: 700 !important;
+}
     </style>
 </head>
 <body>
