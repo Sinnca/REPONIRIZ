@@ -660,7 +660,7 @@ $lostItems = $stmt->fetchAll();
                                                 </span>
                                             <?php endif; ?>
                                         <?php else: ?>
-                                            <span class="badge bg-secondary mb-2">
+                                            <span class="badge bg-secondary mb-2" style="height: 2rem;">
                                                 <i class="bi bi-person-check me-1"></i>You reported this item
                                             </span>
                                         <?php endif; ?>
