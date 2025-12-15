@@ -660,7 +660,7 @@ $lostItems = $stmt->fetchAll();
                                                 </span>
                                             <?php endif; ?>
                                         <?php else: ?>
-                                            <span class="badge bg-secondary mb-2" style="height: 2rem;">
+                                            <span class="badge bg-success mb-2" style="height: 2rem;">
                                                 <i class="bi bi-person-check me-1"></i>You reported this item
                                             </span>
                                         <?php endif; ?>
@@ -702,7 +702,7 @@ $lostItems = $stmt->fetchAll();
 
 <footer class="text-center">
     <div class="container">
-        <p><i class="bi bi-shield-check"></i>&copy; 2024 Campus Lost & Found System. All rights reserved.</p>
+        <p><i class="bi bi-shield-check"></i>&copy; 2025 Campus Lost & Found System. All rights reserved.</p>
     </div>
 </footer>
 

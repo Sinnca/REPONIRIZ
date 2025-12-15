@@ -761,7 +761,7 @@ $notifications = $stmtNotifications->fetchAll();
 
 <footer class="text-center">
     <div class="container">
-        <p class="mb-0"><i class="bi bi-shield-check me-2"></i>&copy; 2024 Campus Lost & Found System. All rights reserved.</p>
+        <p class="mb-0"><i class="bi bi-shield-check me-2"></i>&copy; 2025 Campus Lost & Found System. All rights reserved.</p>
     </div>
 </footer>
 

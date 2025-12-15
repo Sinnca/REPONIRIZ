@@ -153,20 +153,42 @@ function formatDateTime($datetime) {
 /**
  * Get status badge HTML
  */
+//function getStatusBadge($status) {
+//    $badges = [
+//        'pending' => '<span class="badge badge-warning">Pending</span>',
+//        'listed' => '<span class="badge badge-info">Listed</span>',
+//        'ready_for_claim' => '<span class="badge badge-success">Ready for Claim</span>',
+//        'returned' => '<span class="badge badge-secondary">Returned</span>',
+//        'rejected' => '<span class="badge badge-danger">Rejected</span>',
+//        'verified' => '<span class="badge badge-success">Verified</span>',
+//        'claimed' => '<span class="badge badge-secondary">Claimed</span>',
+//        'approved' => '<span class="badge badge-success">Approved</span>',
+//        'scheduled' => '<span class="badge badge-primary">Scheduled</span>',
+//        'completed' => '<span class="badge badge-secondary">Completed</span>',
+//    ];
+//    return $badges[$status] ?? '<span class="badge badge-light">' . ucfirst($status) . '</span>';
+//}
 function getStatusBadge($status) {
-    $badges = [
-        'pending' => '<span class="badge badge-warning">Pending</span>',
-        'listed' => '<span class="badge badge-info">Listed</span>',
-        'ready_for_claim' => '<span class="badge badge-success">Ready for Claim</span>',
-        'returned' => '<span class="badge badge-secondary">Returned</span>',
-        'rejected' => '<span class="badge badge-danger">Rejected</span>',
-        'verified' => '<span class="badge badge-success">Verified</span>',
-        'claimed' => '<span class="badge badge-secondary">Claimed</span>',
-        'approved' => '<span class="badge badge-success">Approved</span>',
-        'scheduled' => '<span class="badge badge-primary">Scheduled</span>',
-        'completed' => '<span class="badge badge-secondary">Completed</span>',
+    $map = [
+        'pending' => 'warning',
+        'listed' => 'info',
+        'ready_for_claim' => 'success',
+        'returned' => 'secondary',
+        'rejected' => 'danger',
+        'verified' => 'success',
+        'claimed' => 'secondary',
+        'approved' => 'success',
+        'scheduled' => 'primary',
+        'completed' => 'secondary',
     ];
-    return $badges[$status] ?? '<span class="badge badge-light">' . ucfirst($status) . '</span>';
+
+    $color = $map[$status] ?? 'light';
+    $label = ucfirst(str_replace('_', ' ', $status));
+
+    return "
+    <span class='badge badge-$color bg-$color'>
+        $label
+    </span>";
 }
 
 /**

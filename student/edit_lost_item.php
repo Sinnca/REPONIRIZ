@@ -793,7 +793,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- Footer -->
 <footer>
     <div class="container">
-        <p><i class="bi bi-shield-check"></i>&copy; 2024 Campus Lost & Found System. All rights reserved.</p>
+        <p><i class="bi bi-shield-check"></i>&copy; 2025 Campus Lost & Found System. All rights reserved.</p>
     </div>
 </footer>
 
