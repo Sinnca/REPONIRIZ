@@ -637,6 +637,24 @@ $userName = getCurrentUserName();
                     </div>
                 </div>
             </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#asForgotPassword">
+                        What should I do if I forget my password?
+                    </button>
+                </h2>
+                <div id="asForgotPassword" class="accordion-collapse collapse" data-bs-parent="#accountSystem">
+                    <div class="accordion-body">
+                        If you forget your password:
+                        <ul>
+                            <li>You cannot reset it through the Lost & Found system.</li>
+                            <li>Please visit the <strong>institutional account management office</strong> to reset your password.</li>
+                            <li>Bring a Student ID for verification if required.</li>
+                        </ul>
+                        This ensures your login credentials remain secure and are managed by the authorized office.
+                    </div>
+                </div>
+            </div>
 
             <div class="accordion-item">
                 <h2 class="accordion-header">
