@@ -691,6 +691,7 @@ function getFoundItemName($foundItemId, $matchedFoundItems) {
                 <li class="nav-item"><a class="nav-link active" href="lost_items.php"><i class="bi bi-search me-1"></i>Browse Lost</a></li>
                 <li class="nav-item"><a class="nav-link" href="found_items.php"><i class="bi bi-archive me-1"></i>Browse Found</a></li>
                 <li class="nav-item"><a class="nav-link" href="my_items.php"><i class="bi bi-person-lines-fill me-1"></i>My Items</a></li>
+                <li class="nav-item"><a class="nav-link" href="faq.php"><i class="bi bi-question-circle me-1"></i>FAQ</a></li>
             </ul>
             <span class="navbar-text me-3">
                 <i class="bi bi-person-circle me-2"></i>Welcome, <strong><?= htmlspecialchars(getCurrentUserName()); ?></strong>

@@ -100,6 +100,7 @@ if ($existingClaim) {
                 <li class="nav-item"><a class="nav-link" href="lost_items.php">Browse Lost</a></li>
                 <li class="nav-item"><a class="nav-link" href="found_items.php">Browse Found</a></li>
                 <li class="nav-item"><a class="nav-link" href="my_items.php">My Items</a></li>
+                <li class="nav-item"><a class="nav-link" href="faq.php"><i class="bi bi-question-circle me-1"></i>FAQ</a></li>
             </ul>
             <span class="navbar-text me-3">Welcome, <?php echo htmlspecialchars(getCurrentUserName()); ?></span>
             <a class="btn btn-outline-light" href="../logout.php">Logout</a>
