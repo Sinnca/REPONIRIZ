@@ -423,7 +423,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6c757d;
+        }
+
+        .toggle-password:hover {
+            color: #000;
+        }
+
     </style>
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const icon = document.querySelector('.toggle-password');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye-fill');
+                icon.classList.add('bi-eye-slash-fill');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash-fill');
+                icon.classList.add('bi-eye-fill');
+            }
+        }
+    </script>
 
     <script src="assets/js/main.js" defer></script>
     <script src="assets/js/validation.js" defer></script>
@@ -474,8 +503,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="password" class="form-label">
                         <i class="bi bi-lock"></i>Password
                     </label>
+
                     <div class="input-wrapper">
                         <i class="bi bi-lock-fill input-icon"></i>
+
                         <input
                                 type="password"
                                 id="password"
@@ -484,8 +515,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 placeholder="Enter your password"
                                 required
                         >
+
+                        <i
+                                class="bi bi-eye-fill toggle-password"
+                                onclick="togglePassword()"
+                        ></i>
                     </div>
                 </div>
+
 
                 <button type="submit" class="btn-login">
                     <i class="bi bi-box-arrow-in-right me-2"></i>Login to Dashboard
