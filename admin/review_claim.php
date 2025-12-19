@@ -263,12 +263,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="col-md-8">
                     <h5>Claimer Information</h5>
+                    <h4><strong>Item Name: </strong><?= htmlspecialchars($claim['found_item_name']) ?></h4>
                     <p><strong>Name:</strong> <?= htmlspecialchars($claim['requester_name']) ?></p>
                     <p><strong>Email:</strong> <?= htmlspecialchars($claim['requester_email']) ?></p>
+
+                    <?php if (!empty($claim['item_description'])): ?>
+                        <p><strong>Description:</strong> <?= nl2br(htmlspecialchars($claim['item_description'])) ?></p>
+                    <?php endif; ?>
+
+                    <?php if (!empty($claim['date_found'])): ?>
+                        <p><strong>Date Found:</strong> <?= formatDate($claim['date_found']) ?></p>
+                    <?php endif; ?>
+
+                    <?php if (!empty($claim['found_by'])): ?>
+                        <p><strong>Found By:</strong> <?= htmlspecialchars($claim['found_by']) ?></p>
+                    <?php endif; ?>
+
                     <?php if ($claim['notes']): ?>
                         <p><strong>Notes:</strong> <?= nl2br(htmlspecialchars($claim['notes'])) ?></p>
                     <?php endif; ?>
                 </div>
+
             </div>
         </div>
     </div>
@@ -289,10 +304,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="col-md-8">
                         <h5>Item Information</h5>
-                        <h6><?= htmlspecialchars($claim['found_item_name']) ?></h6>
-                        <p><?= nl2br(htmlspecialchars($claim['found_description'])) ?></p>
-                        <p><strong>Date Found:</strong> <?= formatDate($claim['date_found']) ?></p>
+                        <h4><strong>Item Name: </strong><?= htmlspecialchars($claim['found_item_name']) ?></h4>
+
+                        <?php if (!empty($claim['found_description'])): ?>
+                            <p><strong>Description:</strong> <?= nl2br(htmlspecialchars($claim['found_description'])) ?></p>
+                        <?php endif; ?>
+
+                        <?php if (!empty($claim['date_found'])): ?>
+                            <p><strong>Date Found:</strong> <?= formatDate($claim['date_found']) ?></p>
+                        <?php endif; ?>
+
+                        <?php if (!empty($claim['found_by'])): ?>
+                            <p><strong>Found By:</strong> <?= htmlspecialchars($claim['found_by']) ?></p>
+                        <?php endif; ?>
                     </div>
+
                 </div>
             </div>
         </div>
