@@ -210,6 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review Claim Request - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../assets/css/admin_reviewclaim.css" rel="stylesheet">
 </head>
 <body>
@@ -332,7 +333,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="col-md-6">
                         <div class="action-card">
                             <h5>Approve & Schedule</h5>
-                            <form method="POST">
+                            <form method="POST" id="approveForm">
                                 <input type="hidden" name="action" value="approve">
                                 <div class="mb-3">
                                     <label class="form-label">Date</label>
@@ -365,7 +366,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="col-md-6">
                     <div class="action-card">
                         <h5><?= $claim['status'] === 'pending' ? 'Reject Claim' : 'Reject Scheduled Claim' ?></h5>
-                        <form method="POST">
+                        <form method="POST" id="rejectForm">
                             <input type="hidden" name="action" value="reject">
                             <div class="mb-3">
                                 <label class="form-label">Reason</label>
@@ -375,9 +376,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                           placeholder="Provide a reason for rejection..."
                                           required></textarea>
                             </div>
-                            <button type="submit" 
+                            <button type="button" 
                                     class="btn btn-danger" 
-                                    onclick="return confirm('Reject this claim?')">
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#rejectModal">
                                 Reject
                             </button>
                         </form>
@@ -399,11 +401,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </ul>
                             </div>
                             
-                            <form method="POST">
+                            <form method="POST" id="completeForm">
                                 <input type="hidden" name="action" value="complete">
-                                <button type="submit" 
+                                <button type="button" 
                                         class="btn btn-primary" 
-                                        onclick="return confirm('Mark this claim as completed?')">
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#completeModal">
                                     Complete Claim
                                 </button>
                             </form>
@@ -419,10 +422,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 </main>
 
+<!-- Reject Confirmation Modal -->
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rejectModalLabel">Confirm Rejection</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to reject this claim?</p>
+                <p class="text-muted mb-0">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmReject">Reject Claim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Complete Confirmation Modal -->
+<div class="modal fade" id="completeModal" tabindex="-1" aria-labelledby="completeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="completeModalLabel">Complete Claim</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to mark this claim as completed?</p>
+                <p class="text-muted mb-0">This will update the item status and notify all relevant parties.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmComplete">Complete Claim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <footer>
     &copy; 2025 Campus Lost & Found System - Admin Panel
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Handle reject confirmation
+    document.getElementById('confirmReject').addEventListener('click', function() {
+        document.getElementById('rejectForm').submit();
+    });
+
+    // Handle complete confirmation
+    document.getElementById('confirmComplete').addEventListener('click', function() {
+        document.getElementById('completeForm').submit();
+    });
+</script>
 </body>
 </html>
