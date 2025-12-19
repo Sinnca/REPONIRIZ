@@ -276,13 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p><strong>Date Found:</strong> <?= formatDate($claim['date_found']) ?></p>
                     <?php endif; ?>
 
-                    <?php if (!empty($claim['found_by'])): ?>
-                        <p><strong>Found By:</strong> <?= htmlspecialchars($claim['found_by']) ?></p>
-                    <?php endif; ?>
-
-                    <?php if ($claim['notes']): ?>
-                        <p><strong>Notes:</strong> <?= nl2br(htmlspecialchars($claim['notes'])) ?></p>
-                    <?php endif; ?>
+                    
                 </div>
 
             </div>
